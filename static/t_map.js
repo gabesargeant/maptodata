@@ -164,19 +164,19 @@ require([
 
         var stp = min_max[2]; //Even breaks to start with.
 
-        var stp1 = min_max[0];
-        var stp2 = stp1 +(stp * 1);
-        var stp3 = stp1 +(stp * 2);
-        var stp4 = stp1 + (stp * 3);
-        var stp5 = stp1 + (stp * 4);
-
+        var stp1 = 0;
+        var stp2 = stp
+        var stp3 = (stp * 2);
+        var stp4 = (stp * 3);
+        var stp5 = (stp * 4);
+        var top = min_max[1]; //max returned val
 
         var ren = new ClassBreaksRenderer(symbol, findvalue)
         ren.addBreak(stp1, stp2, new SimpleFillSymbol().setColor(new Color([56, 168, 0, 0.5])));
         ren.addBreak(stp2 + 1, stp3, new SimpleFillSymbol().setColor(new Color([139, 209, 0, 0.5])));
         ren.addBreak(stp3 + 1, stp4, new SimpleFillSymbol().setColor(new Color([255, 255, 0, 0.5])));
         ren.addBreak(stp4 + 1, stp5, new SimpleFillSymbol().setColor(new Color([255, 128, 0, 0.5])));
-        ren.addBreak(stp5 + 1, Infinity, new SimpleFillSymbol().setColor(new Color([254, 0, 0, 0.7])));
+        ren.addBreak(stp5 + 1, top, new SimpleFillSymbol().setColor(new Color([254, 0, 0, 0.7])));
 
         // var ext_arr=[];
 
@@ -195,8 +195,6 @@ require([
 
             return val;
         }
-
-        console.log(featureLayer);
 
         featureLayer.setRenderer(ren);
         map.addLayer(featureLayer);
@@ -231,26 +229,63 @@ require([
             map.setExtent(ext1.expand(1.25));
             first = true;
             document.getElementById("one_b").value = parseInt(stp1);
-            document.getElementById("two_b").value = parseInt(stp2+1);
-            document.getElementById("three_b").value = parseInt(stp3+1);
-            document.getElementById("four_b").value = parseInt(stp4+1);
-            document.getElementById("five_b").value = parseInt(stp5+1);
+            document.getElementById("two_b").value = parseInt(stp2 + 1);
+            document.getElementById("three_b").value = parseInt(stp3 + 1);
+            document.getElementById("four_b").value = parseInt(stp4 + 1);
+            document.getElementById("five_b").value = parseInt(stp5 + 1);
 
             document.getElementById("one_a").innerHTML = parseInt(stp2);
             document.getElementById("two_a").innerHTML = parseInt(stp3);
             document.getElementById("three_a").innerHTML = parseInt(stp4);
             document.getElementById("four_a").innerHTML = parseInt(stp5);
-             document.getElementById("five_a").innerHTML = parseInt(stp5+stp1);
+            document.getElementById("five_a").value = parseInt(top);
 
-            document.getElementById("one_c").style.backgroundColor = "rgb(56, 168, 0)"; 
-            document.getElementById("two_c").style.backgroundColor = "rgb(139, 209, 0)"; 
-            document.getElementById("three_c").style.backgroundColor = "rgb(255, 255, 0)"; 
-            document.getElementById("four_c").style.backgroundColor = "rgb(255, 128, 0)"; 
-            document.getElementById("five_c").style.backgroundColor = "rgb(254, 0, 0)"; 
+            document.getElementById("one_c").style.backgroundColor = "rgb(56, 168, 0)";
+            document.getElementById("two_c").style.backgroundColor = "rgb(139, 209, 0)";
+            document.getElementById("three_c").style.backgroundColor = "rgb(255, 255, 0)";
+            document.getElementById("four_c").style.backgroundColor = "rgb(255, 128, 0)";
+            document.getElementById("five_c").style.backgroundColor = "rgb(254, 0, 0)";
 
         });
 
+        //This pulls off the current layer and the renderer and then updates
+        //the breaks based on a users input!
+        on(updateBreaks, 'click', function () {
+            //console.log(map.graphicsLayerIds.length);
+            l_id = map.graphicsLayerIds[0];
+            
+            layer = map.getLayer(l_id);
+            map.removeLayer(layer);
 
+            stp1 = parseFloat(document.getElementById("one_b").value);
+            stp2 = parseFloat(document.getElementById("two_b").value);
+            stp3 = parseFloat(document.getElementById("three_b").value);
+            stp4 = parseFloat(document.getElementById("four_b").value);
+            stp5 = parseFloat(document.getElementById("five_b").value);
+            top = parseFloat(document.getElementById("five_a").value);
+
+            //the minus one is a correct just to make the breaks not match up.
+            document.getElementById("one_a").innerHTML = parseInt(stp2-1); 
+            document.getElementById("two_a").innerHTML = parseInt(stp3-1);
+            document.getElementById("three_a").innerHTML = parseInt(stp4-1);
+            document.getElementById("four_a").innerHTML = parseInt(stp5-1);
+            document.getElementById("five_a").value = parseInt(top);
+
+            var ren = new ClassBreaksRenderer(symbol, findvalue)
+            ren.addBreak(stp1, stp2, new SimpleFillSymbol().setColor(new Color([56, 168, 0, 0.5])));
+            ren.addBreak(stp2 + 1, stp3, new SimpleFillSymbol().setColor(new Color([139, 209, 0, 0.5])));
+            ren.addBreak(stp3 + 1, stp4, new SimpleFillSymbol().setColor(new Color([255, 255, 0, 0.5])));
+            ren.addBreak(stp4 + 1, stp5, new SimpleFillSymbol().setColor(new Color([255, 128, 0, 0.5])));
+            ren.addBreak(stp5 + 1, top, new SimpleFillSymbol().setColor(new Color([254, 0, 0, 0.7])));
+
+
+            var fl = get_feature_layer(thematic_region);
+
+            fl.setRenderer(ren);
+            map.addLayer(fl);
+
+
+        });
 
 
 

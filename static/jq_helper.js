@@ -12,7 +12,7 @@ function _getColumnNames(num, rslt, btnNum) {
         for (i = 0; i < array.length; i++) {
             var fld =  array[i][1];
             fld = fld.replace(/_/g, ' ');
-            var $result_div = "<input type=\"checkbox\" id\"columns\" name=\"columns\" value=" + array[i][0] + ">" + fld + "<br/>";
+            var $result_div = "<label class=\"cklbl\"><input type=\"checkbox\" id\"columns\" name=\"columns\" value=" + array[i][0] + ">" + fld + "</label>";
             $("#" + rslt).append($result_div);
 
         }

@@ -29,24 +29,15 @@
  	margin: auto;
  }
 
-label { 
+.lbl { 
   padding: 0.5em;
 }
 #expand {
-  height: 0px;
-  overflow: hidden;
-  transition: height 0.5;
+    height: 550px;
+	overflow-y: scroll;
+  	display: none;
 }
 
-#toggle:checked ~ #expand {
-  height: 550px;
-  overflow-y: scroll;
-}
-
-#toggle{
-	/*visibility: hidden;*/
-	display: inline;
-}
 
 #mapLegend > td{
 	width:250px;
@@ -80,4 +71,29 @@ label {
 		border: 1px solid #000;
 }
 
+.ajbtn{
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 3px;
+	display: inline-block;
+	white-space:nowrap;
+	overflow:hidden;;
 
+}
+
+.clst{
+	line-height: 1em;
+}
+
+.cklbl{
+	display: block;
+	position: relative;
+	
+}
+.cklbl >input{
+	vertical-align: middle;
+}
+
+.cklbl:hover{
+	background:#e6b4c0; /* make this whatever you want */
+}
