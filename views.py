@@ -142,3 +142,12 @@ def back_home():
     return render_template('data.html',
                            title='Data on a Map!',
                            column=column)
+
+
+@app.errorhandler(404)
+def error_redirect(e):
+    """
+    Redirect all 404's back to index.
+    """
+
+    return render_template('error.html', title='Find places on a map!')

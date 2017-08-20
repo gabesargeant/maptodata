@@ -1,5 +1,5 @@
 var map;
-
+var thematic_code_name;
 require([
     "dojo/on",
     "esri/map",
@@ -31,12 +31,47 @@ require([
             zoom: 4
         });
 
-        var infoTemplate = new InfoTemplate("${NAME}", "${*}");
+        //var infoTemplate = new InfoTemplate("${NAME}", "${*}");
+
+        // var infoTemplate = new InfoTemplate("${NAME}", "${*}", ""
+        // "The number of people that applied under the RRTA from ${country} is approximatley <u><b size=\"12\">" + "${count(*)}\n\
+        // </b></u>for details on their case before the RRTA click the following button <br><br><center> \
+        // <form action=\"search.php\" method=\"get\"> \
+        // <input name=\"db\" value=\"RRTA\" type=\"hidden\" >\
+        // <input name=\"country\" type=\"submit\" value=\"${name}\"/><form></center>",
+        // );
+        var infoTemplate = new InfoTemplate();
+        infoTemplate.setTitle("Title"); //Standin
+        infoTemplate.setContent(getInfoContent);
+
+        function getInfoContent(graphic) {
+
+            var name = graphic.attributes[thematic_code_name];
+            infoTemplate.setTitle(name);
+        
+            var cdx = graphic.attributes[thematic_region];
+            var val = "<br/>No Data Avalible, Sorry!";
+            for (var i = 0; i < data.length; i++) {
+
+                if (cdx.localeCompare(data[i][0]) == 0) {
+                    val = data[i][1];
+
+                }
+            }
+            rtn_str ="<b>" + column[0] + " : " + real_column + "</b><br>" +
+            "<br> The value of the selected area <b>" + name + "</b> is <b>" + val + "</b>\
+            <br/><br><hr style=\"width:75%\">For reference: The area code that relates to this region is\
+            <br/> <b>Region Code</b> : <b>" + cdx + "</b>";
+
+            return rtn_str;
+
+        };
 
 
 
         function get_feature_layer(thematic_region) {
             var layer;
+            
             switch (String(thematic_region)) {
                 case "AUS_CODE_2016":
                     layer = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/1", {
@@ -44,7 +79,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name = 'AUS_NAME_2016';
                     break;
 
                 case "STATE_CODE_2016":
@@ -54,7 +89,7 @@ require([
                         id: thematic_region,
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name ='STATE_NAME_2016';
                     break;
 
                 case "SA4_CODE_2016":
@@ -63,7 +98,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name = 'SA4_NAME_2016';
                     break;
 
                 case "SA3_CODE_2016":
@@ -72,7 +107,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name = 'SA3_NAME_2016';
                     break;
 
                 case "SA2_MAINCODE_2016":
@@ -81,7 +116,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name = 'SA2_NAME_2016';
                     break;
 
                 case "SA1_7DIGIT_2016":
@@ -90,7 +125,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name = 'SA1_MAINCODE_2016';
                     break;
 
                 case "SSC_CENSUSCODE_2016":
@@ -99,7 +134,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name = 'SSC_NAME_2016';
                     break;
 
                 case "POA_CENSUSCODE_2016":
@@ -108,7 +143,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name ='POA_NAME_2016';
                     break;
 
                 case "GCCSA_CODE_2016;":
@@ -117,7 +152,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name = 'GCCSA_NAME_2016';
                     break;
 
                 case "CED_CENSUSCODE_2016":
@@ -126,7 +161,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name ='CED_NAME_2016';
                     break;
 
                 case "SED_CENSUSCODE_2016":
@@ -135,7 +170,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name ='SED_NAME_2016';
                     break;
 
                 case "LGA_CENSUSCODE_2016":
@@ -144,7 +179,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-
+                    thematic_code_name = 'LGA_NAME_2016';
                     break;
 
             }
@@ -253,7 +288,7 @@ require([
         on(updateBreaks, 'click', function () {
             //console.log(map.graphicsLayerIds.length);
             l_id = map.graphicsLayerIds[0];
-            
+
             layer = map.getLayer(l_id);
             map.removeLayer(layer);
 
@@ -265,10 +300,10 @@ require([
             top = parseFloat(document.getElementById("five_a").value);
 
             //the minus one is a correct just to make the breaks not match up.
-            document.getElementById("one_a").innerHTML = parseInt(stp2-1); 
-            document.getElementById("two_a").innerHTML = parseInt(stp3-1);
-            document.getElementById("three_a").innerHTML = parseInt(stp4-1);
-            document.getElementById("four_a").innerHTML = parseInt(stp5-1);
+            document.getElementById("one_a").innerHTML = parseInt(stp2 - 1);
+            document.getElementById("two_a").innerHTML = parseInt(stp3 - 1);
+            document.getElementById("three_a").innerHTML = parseInt(stp4 - 1);
+            document.getElementById("four_a").innerHTML = parseInt(stp5 - 1);
             document.getElementById("five_a").value = parseInt(top);
 
             var ren = new ClassBreaksRenderer(symbol, findvalue)

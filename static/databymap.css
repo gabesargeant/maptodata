@@ -1,7 +1,8 @@
  html, body{
  	font-family: Verdana, Geneva, sans-serif;
  	font-size: 10pt;
- 	color: #444444;
+	 color: #444444;
+	 height: 100%;
  }
 #map{
 	min-height: 80%;
@@ -96,4 +97,8 @@
 
 .cklbl:hover{
 	background:#e6b4c0; /* make this whatever you want */
+}
+
+table.dataTable tr:hover td {
+	background:#e6b4c0;
 }

@@ -179,10 +179,10 @@ require([
             var code;
             switch (e) {
                 case '0':
-                    map.setZoom(4);
+                    map.setZoom(3);
                     break;
                 case '1':
-                    map.setZoom(4);
+                    map.setZoom(3);
                     break;
                 case '2':
                     map.setZoom(4);
