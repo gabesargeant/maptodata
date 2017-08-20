@@ -1,0 +1,241 @@
+{% extends "base.html" %} {% block content %}
+<script src="https://js.arcgis.com/3.21/"></script>
+<script src="static/map.js"></script>
+<script src="static/jq_helper.js"></script>
+
+
+<input id="toggle" type="checkbox">
+<label for="toggle"><em>Click</em> to <b>Show</b> and <b>hide</b> fields that you can view data about (There are about ~8000)</label>
+<div id="expand">
+  <section>
+    <p>
+      <form id="fieldForm" action="/data" method="POST" style='display:inline;'>
+
+        <div id="1dctr">
+          <input type="button" id="btn1" onclick="_getColumnNames('01', '1d', 'btn1')" value="Get Fields relating to:"> Selected
+          Person Characteristics by Sex - Persons
+        </div>
+        <div id="1d"></div>
+        <div id="2dctr">
+          <input type="button" id="btn2" onclick="_getColumnNames('02', '2d', 'btn2')" value="Get Fields relating to:"> Selected
+          Medians and Averages
+        </div>
+        <div id="2d"></div>
+        <div id="3dctr">
+          <input type="button" id="btn3" onclick="_getColumnNames('03', '3d', 'btn3')" value="Get Fields relating to:"> Place
+          of Usual Residence on Census Night by Age - Persons
+
+        </div>
+        <div id="3d"></div>
+        <div id="4dctr">
+          <input type="button" id="btn4" onclick="_getColumnNames('04', '4d', 'btn4')" value="Get Fields relating to:"> Age
+          by Sex - Persons
+
+        </div>
+        <div id="4d"></div>
+        <div id="5dctr">
+          <input type="button" id="btn5" onclick="_getColumnNames('05', '5d', 'btn5')" value="Get Fields relating to:"> Registered
+          Marital Status by Age by Sex - Persons aged 15 years and over
+
+        </div>
+        <div id="5d"></div>
+        <div id="6dctr">
+          <input type="button" id="btn6" onclick="_getColumnNames('06', '6d', 'btn6')" value="Get Fields relating to:"> Social
+          Marital Status by Age by Sex - Persons aged 15 years and over
+
+        </div>
+        <div id="6d"></div>
+        <div id="7dctr">
+          <input type="button" id="btn7" onclick="_getColumnNames('07', '7d', 'btn7')" value="Get Fields relating to:"> Indigenous
+          Status by Age by Sex - Persons
+
+        </div>
+        <div id="7d"></div>
+        <div id="8dctr">
+          <input type="button" id="btn8" onclick="_getColumnNames('08', '8d', 'btn8')" value="Get Fields relating to:"> Ancestry
+          by Country of Birth of Parents - Responses and persons
+
+        </div>
+        <div id="8d"></div>
+        <div id="9dctr">
+          <input type="button" id="btn9" onclick="_getColumnNames('09', '9d', 'btn9')" value="Get Fields relating to:"> Country
+          of Birth of Person by Age by Sex - Persons
+        </div>
+        <div id="9d"></div>
+        <div id="10dctr">
+          <input type="button" id="btn10" onclick="_getColumnNames('10', '10d', 'btn10')" value="Get Fields relating to:">          Country of Birth of Person by Year of Arrival in Australia - Persons born overseas
+
+        </div>
+        <div id="10d"></div>
+        <div id="11dctr">
+          <input type="button" id="btn11" onclick="_getColumnNames('11', '11d', 'btn11')" value="Get Fields relating to:">          Proficiency in Spoken English/Language by Year of Arrival in Australia by Age - Persons born overseas
+
+        </div>
+        <div id="11d"></div>
+        <div id="12dctr"><input type="button" id="btn12" onclick="_getColumnNames('12', '12d', 'btn12')" value="Get Fields relating to:">          Proficiency in Spoken English/Language of Parents by Age of Dependent Children - Dependent children in couple families
+
+        </div>
+        <div id="12d"></div>
+        <div id="13dctr"><input type="button" id="btn13" onclick="_getColumnNames('13', '13d', 'btn13')" value="Get Fields relating to:">          Language Spoken at Home by Proficiency in Spoken English/Language by Sex - Persons
+
+        </div>
+        <div id="13d"></div>
+        <div id="14dctr"><input type="button" id="btn14" onclick="_getColumnNames('14', '14d', 'btn14')" value="Get Fields relating to:">          Religious Affiliation by Sex - Persons
+
+        </div>
+        <div id="14d"></div>
+        <div id="15dctr"><input type="button" id="btn15" onclick="_getColumnNames('15', '15d', 'btn15')" value="Get Fields relating to:">          Type of Educational Institution Attending (Full/Part-Time Student Status by Age) by Sex - Persons attending an
+          educational institution
+
+        </div>
+        <div id="15d"></div>
+        <div id="16dctr"><input type="button" id="btn16" onclick="_getColumnNames('16', '16d', 'btn16')" value="Get Fields relating to:">          Highest Year of School Completed by Age by Sex - Persons aged 15 years and over who are no longer attending primary
+          or secondary school.
+
+        </div>
+        <div id="16d"></div>
+        <div id="17dctr"><input type="button" id="btn17" onclick="_getColumnNames('17', '17d', 'btn17')" value="Get Fields relating to:">          Total Personal Income (Weekly) by Age by Sex - Persons aged 15 years and over
+
+        </div>
+        <div id="17d"></div>
+        <div id="18dctr"><input type="button" id="btn18" onclick="_getColumnNames('18', '18d', 'btn18')" value="Get Fields relating to:">          Core Activity Need for Assistance by Age by Sex - Persons
+
+        </div>
+        <div id="18d"></div>
+        <div id="19dctr"><input type="button" id="btn19" onclick="_getColumnNames('19', '19d', 'btn19')" value="Get Fields relating to:">          Voluntary Work for an Organisation or Group by Age by Sex - Persons aged 15 years and over
+
+        </div>
+        <div id="19d"></div>
+        <div id="20dctr">
+          <input type="button" id="btn20" onclick="_getColumnNames('20', '20d', 'btn20')" value="Get Fields relating to:">          Unpaid Domestic Work: Number of House by Age by Sex - Persons aged 15 years and over
+
+        </div>
+        <div id="20d"></div>
+        <div id="21dctr">
+          <input type="button" id="btn21" onclick="_getColumnNames('21', '21d', 'btn21')" value="Get Fields relating to:">          Unpaid Assistance to a Person with a Disability by Age by Sex - Persons aged 15 years and over
+
+        </div>
+        <div id="21d"></div>
+        <div id="22dctr">
+          <input type="button" id="btn22" onclick="_getColumnNames('22', '22d', 'btn22')" value="Get Fields relating to:">          Unpaid Child Care by Age by Sex - Persons aged 15 years and over
+
+        </div>
+        <div id="22d"></div>
+        <div id="23dctr">
+          <input type="button" id="btn23" onclick="_getColumnNames('23', '23d', 'btn23')" value="Get Fields relating to:">          Relationship in Household by Age by Sex - Persons in occupied private dwellings
+
+        </div>
+        <div id="23d"></div>
+        <div id="24dctr">
+          <input type="button" id="btn24" onclick="_getColumnNames('24', '24d', 'btn24')" value="Get Fields relating to:">          Number of Children Ever Born by Age of Parent - Females aged 15 years and over
+
+        </div>
+        <div id="24d"></div>
+        <div id="25dctr">
+          <input type="button" id="btn25" onclick="_getColumnNames('25', '25d', 'btn25')" value="Get Fields relating to:">          Family Composition - Families and persons in families in occupied private dwellings
+
+        </div>
+        <div id="25d"></div>
+        <div id="26dctr">
+          <input type="button" id="btn26" onclick="_getColumnNames('26', '26d', 'btn26')" value="Get Fields relating to:">          Family Composition and Country of Birth of Parents by Age of Dependent Children - Dependent children
+
+        </div>
+        <div id="26d"></div>
+        <div id="27dctr">
+          <input type="button" id="btn27" onclick="_getColumnNames('27', '27d', 'btn27')" value="Get Fields relating to:">          Family Blending - Couple families with children
+
+        </div>
+        <div id="27d"></div>
+        <div id="28dctr">
+          <input type="button" id="btn28" onclick="_getColumnNames('28', '28d', 'btn28')" value="Get Fields relating to:">          Total Family Income (Weekly) by Family Composition - Families in family households
+
+        </div>
+        <div id="28d"></div>
+        <div id="29dctr">
+          <input type="button" id="btn29" onclick="_getColumnNames('29', '29d', 'btn29')" value="Get Fields relating to:">          Total Household Income (Weekly) by Household Composition - Occupied private dwellings
+
+        </div>
+        <div id="29d"></div>
+        <div id="30dctr">
+          <input type="button" id="btn30" onclick="_getColumnNames('30', '30d', 'btn30')" value="Get Fields relating to:">          Number of Motor Vehicles by Dwellings - Occupied private dwellings
+
+          <div id="30d"></div>
+          <div id="31dctr">
+            <input type="button" id="btn31" onclick="_getColumnNames('31', '31d', 'btn31')" value="Get Fields relating to:">            Household Composition by Number of Persons Usually Resident - Occupied private dwellings
+
+
+          </div>
+          <div id="31d"></div>
+          <div id="32dctr">
+            <input type="button" id="btn32" onclick="_getColumnNames('32', '32d', 'btn32')" value="Get Fields relating to:">            Dwelling Structure - Private dwellings and persons in occupied private dwellings
+
+          </div>
+          <div id="32d"></div>
+          <div id="33dctr">
+            <input type="button" id="btn33" onclick="_getColumnNames('33', '33d', 'btn33')" value="Get Fields relating to:">            Tenure Type and Landlord Type by Dwelling Structure - Occupied private dwellings
+          </div>
+          <div id="33d"></div>
+          <div id="34dctr">
+            <input type="button" id="btn34" onclick="_getColumnNames('34', '34d', 'btn34')" value="Get Fields relating to:">            Mortgage Repayment (Monthly) by Dwelling Structure - Occupied private dwellings being purchased
+          </div>
+          <div id="34d"></div>
+          <div id="35dctr">
+            <input type="button" id="btn35" onclick="_getColumnNames('35', '35d', 'btn35')" value="Get Fields relating to:">            Mortgage Repayment (Monthly) by Family Composition - Families in occupied private dwellings being purchased
+          </div>
+          <div id="35d"></div>
+          <div id="36dctr"><input type="button" id="btn36" onclick="_getColumnNames('36', '36d', 'btn36')" value="Get Fields relating to:">            Rent (Weekly) by Landlord Type - Occupied private dwellings being rented
+
+          </div>
+          <div id="36d"></div>
+          <div id="37dctr"><input type="button" id="btn37" onclick="_getColumnNames('37', '37d', 'btn37')" value="Get Fields relating to:">            Dwelling Internet Connection by Dwelling Structure - Occupied private dwellings
+
+          </div>
+          <div id="37d"></div>
+          <div id="38dctr"><input type="button" id="btn38" onclick="_getColumnNames('38', '38d', 'btn38')" value="Get Fields relating to:">            Dwelling Structure by Number of Bedrooms - Occupied private dwellings
+
+          </div>
+          <div id="38d"></div>
+          <div id="39dctr"><input type="button" id="btn39" onclick="_getColumnNames('39', '39d', 'btn39')" value="Get Fields relating to:">            Dwelling Structure by Household Composition and Family Composition - Occupied private dwellings
+          </div>
+          <div id="39d"></div>
+
+    </p>
+  </section>
+  </div>
+
+  <hr/> ||| Select an Area <select id="selectLayer" name="selectLayer">
+            
+            <option value="0">Australia</option>
+            <option value="1">State/Territory</option>
+            <option value="2">Statistical Area Level 4</option>
+            <option value="3">Statistical Area Level 3</option>
+            <option value="4">Statistical Area Level 2</option>
+            <option value="5">Statistical Area Level 1</option>
+            <option value="6">State Suburbs</option>
+            <option value="7">Postal Areas</option>
+            <option value="8">Greater Capital City Statistical Areas</option>
+            <option value="9">Commonwealth Electoral Divisions</option>
+            <option value="10">State Electoral Divisions</option>
+            <option value="11">Local Government Areas</option>
+             
+          </select> |||
+  <input name="drawPolygon" type="button" id="drawPolygon" value="Select Polygon" />
+  <input name="drawRectangle" type="button" id="drawRectangle" value="Select Rectangle" />
+  <input name="drawPoint" type="button" id="drawPoint" value="Select Point" /> |||
+  <input name="Reset" type="button" id="Reset" value="Reset" /> |||
+  <input type="hidden" id="fieldsArr" name="fieldsArr" value="" />
+  <input name="getData" type="submit" id="getData" value="Get Data" />
+
+  </form>
+  |||
+  <hr/>
+  <div id="map">
+    <img id="loadingImg" src="static/img/loading.gif" />
+  </div>
+  <hr/>
+
+  <script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson }};
+  </script>
+
+  {%endblock%}

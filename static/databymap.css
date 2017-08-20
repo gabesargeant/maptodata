@@ -1,0 +1,83 @@
+ html, body{
+ 	font-family: Verdana, Geneva, sans-serif;
+ 	font-size: 10pt;
+ 	color: #444444;
+ }
+#map{
+	min-height: 80%;
+	height:80%;
+}
+ 
+
+ 
+ .claro {
+ 	width: 80%;
+ 	height: 80%;
+ 	float: bottom;
+ 	margin-left: 10%;
+ 	margin-right: 10%;
+ }
+
+ #loadingImg {
+ 	position: absolute;
+ 	left: 0;
+ 	top: 0;
+ 	right: 0;
+ 	bottom: 0;
+ 	z-index: 100;
+ 	display: block;
+ 	margin: auto;
+ }
+
+label { 
+  padding: 0.5em;
+}
+#expand {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.5;
+}
+
+#toggle:checked ~ #expand {
+  height: 550px;
+  overflow-y: scroll;
+}
+
+#toggle{
+	/*visibility: hidden;*/
+	display: inline;
+}
+
+#mapLegend > td{
+	width:250px;
+
+}
+
+#one_c, #two_c, #three_c, #four_c, #five_c {
+	width:100px;
+}
+#one_b, #two_b, #three_b, #four_b, #five_b {
+	width:100px;
+}
+
+#one_a, #two_a, #three_a, #four_a, #five_a {
+	width:100px;
+}
+
+.flex-container {
+	 position: relative;
+		flex-wrap: wrap;
+		direction: lft;
+    display: flex;
+}
+.column1{
+	position: absolute;
+}
+.flex-item {
+	padding: 5px;
+		margin: 10px;
+		overflow: auto;
+		border: 1px solid #000;
+}
+
+

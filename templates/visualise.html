@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block content %}
+<script src="https://js.arcgis.com/3.21/"></script>
+<script src="static/t_map.js"></script>
+<script>
+    var thematic_region = '{{region}}'
+    var min_max = {{min_max | safe }}
+    var data = {{json_vardata | safe }};
+
+</script>
+
+<div id="map"></div>
+<div class="flex-container">
+ 
+
+
+
+    <div class="flex-item colum1">
+        <table id="mapLegend">
+            <tr>
+                <td id="one_c"></td>
+                <td><input type="text" size="10" id="one_b"></td>
+                <td> to </td>
+                <td id="one_a"> </td>
+                <td><input type="button" id="updateBreaks" value="Update Breaks"></td>
+            </tr>
+            <tr>
+                <td id="two_c"></td>
+                <td><input type="text" size="10" id="two_b"></td>
+                <td> to </td>
+                <td id="two_a"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td id="three_c"></td>
+                <td><input type="text" size="10" id="three_b"></td>
+                <td> to </td>
+                <td id="three_a"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td id="four_c"></td>
+                <td><input type="text" size="10" id="four_b"></td>
+                <td> to </td>
+                <td id="four_a"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td id="five_c"></td>
+                <td><input type="text" size="10" id="five_b"></td>
+                <td> to </td>
+                <td id="five_a"></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+   <div class="flex-item "> A Thematic Map for Values of <b>{{real_column}}</b> as selected by you.
+        <hr/> 
+        <p>
+  
+
+    </div>
+</div>
+
+
+<script>
+
+</script>
+{%endblock%}

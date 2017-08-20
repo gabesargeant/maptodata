@@ -1,0 +1,8 @@
+[["Intct_fam_no_otr_chld_pre_Fam","Intact_family_with_no_other_children_present_Families"],
+["Step_fam_no_otr_chld_pre_Fam","Step_family_with_no_other_children_present_Families"],
+["Blnd_fam_no_otr_chld_pre_Fam","Blended_family_with_no_other_children_present_Families"],
+["Intct_fam_othr_child_pres_Fam","Intact_family_with_other_children_present_Families"],
+["Step_fam_othr_child_pres_Fam","Step_family_with_other_children_present_Families"],
+["Blnd_fam_othr_child_pres_Fam","Blended_family_with_other_children_present_Families"],
+["Otr_cpl_fam_otr_chld_only_Fam","Other_couple_family_with_other_children_only_Families"],
+["Tot_Families","Total_Families"]]
