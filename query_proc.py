@@ -1,5 +1,5 @@
 """
-This is the main work of the show for the views
+This is the main worker for the views
 """
 
 import re
@@ -298,7 +298,7 @@ def get_region_data_min(table, column, regions):
 def calc_steps(min_max):
     """
     (min / 5 = step)
-    This is just hear in case i want to get more exotic with the breaks.
+    This is just here in case i want to get more exotic with the breaks.
     Like jenks etc
     """
 
