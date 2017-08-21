@@ -145,9 +145,21 @@ def back_home():
 
 
 @app.errorhandler(404)
-def error_redirect(e):
+def error_redirect(err):
     """
     Redirect all 404's back to index.
     """
+    error = err
+    return render_template('error.html',
+                           title='That doesn\'t exist!',
+                           error=error)
 
-    return render_template('error.html', title='Find places on a map!')
+@app.errorhandler(500)
+def error_redirect(err):
+    """
+    Redirect all 404's back to index.
+    """
+    error = err
+    return render_template('error.html',
+                          title='Something went wrong!',
+                          error=error)

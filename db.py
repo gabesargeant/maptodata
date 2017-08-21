@@ -8,8 +8,7 @@ DB_CONFIG = {
     'database':'Census16',
     'password':'dovetail',
     'charset':'utf8',
-    'use_unicode':True,
-    'use_pure':False
+    'use_unicode':True
 }
 
 def get_db_conn():
