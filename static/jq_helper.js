@@ -4,7 +4,7 @@ function _getColumnNames(num, rslt, btnNum) {
     }, function (data) {
         //$("#result").text(data.result);
         var array = data['result'];
-        var $hide_button = "<input type=\"button\" id=\"hide_" + rslt + "\" onclick=\"_hideShowResultDiv(\'" + rslt + "\')\" value=\"Hide / Show Fields relating to:\">";
+        var $hide_button = "<input type=\"button\" class=\"btn\" id=\"hide_" + rslt + "\" onclick=\"_hideShowResultDiv(\'" + rslt + "\')\" value=\"Hide / Show Fields relating to:\">";
 
         $("#" + rslt + "ctr").prepend($hide_button);
         $("#" + btnNum).hide();

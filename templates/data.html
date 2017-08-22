@@ -1,20 +1,20 @@
 {% extends "base.html" %} {% block content %}
 <p>
-    <b>Note:</b> If you didn't read the above FAQ then do so. The TL;DR version is, there are limits, so if your over them I chop your querys down.<br/>
-    Also: If you copy the Table from the bold titles down, skipping the Visualise buttons, you can paste the html table straight into excels and it will be formatted correctly. Magic!
+    <b>Note:</b> If you didn't read the above FAQ then do so. The TL;DR version is, there are limits: if you're over them the queries get chopped down.<br/>
+    If you copy the table from the bold titles down, skipping the visualise buttons, you can paste the html table straight into Excel or Calc and it will be formatted correctly. Magic!
 </p>
 <hr/>
 
 <table class="dataTable">
 
-    <tr>
-         {% for c in columns %}
-            <td>
+    <tr class="bckgrnd">
+         {% for c in columns %}b>Note: Note:</b>
+            <td class="bckgrnd">
                 {%if loop.index0 > 1 %}
                     <form id="fieldForm" action="/visualise" method="POST" target="_blank" style='display:inline;'>
-                    <input type="hidden" id="columnName" name="columnName" value="{{c}}"> 
+                    <input type="hidden" id="columnName" name="columnName" value="{{c}}" > 
                     <input type="hidden" id="raw_regions" name="raw_regions" value="{{raw_regions}}">
-                    <input name="vizdata" type="submit" id="viz" value="Visualise Column"/>
+                    <input name="vizdata" type="submit" id="viz" value="Visualise Column" class="btn"/>
                     </form>
                 {%endif%} 
             </td>

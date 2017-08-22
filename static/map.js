@@ -29,9 +29,9 @@ require([
     Ready
 ) {
         map = new Map("map", {
-            basemap: "gray-vector",
+            basemap: "streets",
             center: [133.25, -24.15],
-            zoom: 3,
+            zoom: 4,
         });
 
 
@@ -130,7 +130,7 @@ require([
             SimpleFillSymbol.STYLE_SOLID,
             new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
                 new Color([255, 0, 0]), 4),
-            new Color([255, 0, 0, 0.6])
+            new Color([255, 0, 0, 0.4])
         );
         aus.setSelectionSymbol(selectionSymbol);
         ste.setSelectionSymbol(selectionSymbol);
@@ -179,25 +179,25 @@ require([
             var code;
             switch (e) {
                 case '0':
-                    map.setZoom(3);
+                    map.setZoom(4);
                     break;
                 case '1':
-                    map.setZoom(3);
+                    map.setZoom(4);
                     break;
                 case '2':
                     map.setZoom(4);
                     break;
                 case '3':
-                    map.setZoom(5);
+                    map.setZoom(7);
                     break;
                 case '4':
-                    map.setZoom(9);
+                    map.setZoom(8);
                     break;
                 case '5':
-                    map.setZoom(11);
+                    map.setZoom(12);
                     break;
                 case '6':
-                    map.setZoom(11);
+                    map.setZoom(12);
                     break;
                 case '7':
                     map.setZoom(10);

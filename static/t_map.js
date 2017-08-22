@@ -1,5 +1,50 @@
 var map;
 var thematic_code_name;
+
+var map_colors =
+[
+    [56, 168, 0,0.5],
+    [139, 209, 0,0.5],
+    [255, 255, 0,0.5],
+    [255, 128, 0,0.5],
+    [254, 0, 0,0.5],
+    
+    [237,248,251,0.5],
+    [178,226,226,0.5],
+    [102,194,164,0.5],
+    [44,162,95,0.5],
+    [0,109,44,0.5],
+    
+    [255,255,178,0.5],
+    [254,204,92,0.5],
+    [253,141,60,0.5],
+    [240,59,32,0.5],
+    [189,0,38,0.5],
+    
+    [252,197,192,0.5],
+    [250,159,181,0.5],
+    [247,104,161,0.5],
+    [197,27,138,0.5],
+    [122,1,119,0.5],
+    
+    [44,123,182,0.5],
+    [171,217,233,0.5],
+    [255,255,191,0.5],
+    [253,174,97,0.5],
+    [215,25,28,0.5],
+    
+    [141,211,199,0.5],
+    [255,255,179,0.5],
+    [190,186,218,0.5],
+    [251,128,114,0.5],
+    [128,177,211,0.5],
+    
+    [247,247,247,0.5],
+    [204,204,204,0.5],
+    [150,150,150,0.5],
+    [99,99,99,0.5],
+    [37,37,37,0.5]
+    ];   
 require([
     "dojo/on",
     "esri/map",
@@ -48,7 +93,7 @@ require([
 
             var name = graphic.attributes[thematic_code_name];
             infoTemplate.setTitle(name);
-        
+
             var cdx = graphic.attributes[thematic_region];
             var val = "<br/>No Data Avalible, Sorry!";
             for (var i = 0; i < data.length; i++) {
@@ -58,8 +103,8 @@ require([
 
                 }
             }
-            rtn_str ="<b>" + column[0] + " : " + real_column + "</b><br>" +
-            "<br> The value of the selected area <b>" + name + "</b> is <b>" + val + "</b>\
+            rtn_str = "<b>" + column[0] + " : " + real_column + "</b><br>" +
+                "<br> The value of the selected area <b>" + name + "</b> is <b>" + val + "</b>\
             <br/><br><hr style=\"width:75%\">For reference: The area code that relates to this region is\
             <br/> <b>Region Code</b> : <b>" + cdx + "</b>";
 
@@ -71,7 +116,7 @@ require([
 
         function get_feature_layer(thematic_region) {
             var layer;
-            
+
             switch (String(thematic_region)) {
                 case "AUS_CODE_2016":
                     layer = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/1", {
@@ -89,7 +134,7 @@ require([
                         id: thematic_region,
                         infoTemplate: infoTemplate
                     });
-                    thematic_code_name ='STATE_NAME_2016';
+                    thematic_code_name = 'STATE_NAME_2016';
                     break;
 
                 case "SA4_CODE_2016":
@@ -143,7 +188,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-                    thematic_code_name ='POA_NAME_2016';
+                    thematic_code_name = 'POA_NAME_2016';
                     break;
 
                 case "GCCSA_CODE_2016;":
@@ -161,7 +206,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-                    thematic_code_name ='CED_NAME_2016';
+                    thematic_code_name = 'CED_NAME_2016';
                     break;
 
                 case "SED_CENSUSCODE_2016":
@@ -170,7 +215,7 @@ require([
                         outFields: ["*"],
                         infoTemplate: infoTemplate
                     });
-                    thematic_code_name ='SED_NAME_2016';
+                    thematic_code_name = 'SED_NAME_2016';
                     break;
 
                 case "LGA_CENSUSCODE_2016":
@@ -206,12 +251,18 @@ require([
         var stp5 = (stp * 4);
         var top = min_max[1]; //max returned val
 
+        var c1 = map_colors[0];
+        var c2 = map_colors[1];
+        var c3 = map_colors[2];
+        var c4 = map_colors[3];
+        var c5 = map_colors[4];
+
         var ren = new ClassBreaksRenderer(symbol, findvalue)
-        ren.addBreak(stp1, stp2, new SimpleFillSymbol().setColor(new Color([56, 168, 0, 0.5])));
-        ren.addBreak(stp2 + 1, stp3, new SimpleFillSymbol().setColor(new Color([139, 209, 0, 0.5])));
-        ren.addBreak(stp3 + 1, stp4, new SimpleFillSymbol().setColor(new Color([255, 255, 0, 0.5])));
-        ren.addBreak(stp4 + 1, stp5, new SimpleFillSymbol().setColor(new Color([255, 128, 0, 0.5])));
-        ren.addBreak(stp5 + 1, top, new SimpleFillSymbol().setColor(new Color([254, 0, 0, 0.7])));
+        ren.addBreak(stp1, stp2, new SimpleFillSymbol().setColor(new Color(c1)));
+        ren.addBreak(stp2 + 1, stp3, new SimpleFillSymbol().setColor(new Color(c2)));
+        ren.addBreak(stp3 + 1, stp4, new SimpleFillSymbol().setColor(new Color(c3)));
+        ren.addBreak(stp4 + 1, stp5, new SimpleFillSymbol().setColor(new Color(c4)));
+        ren.addBreak(stp5 + 1, top, new SimpleFillSymbol().setColor(new Color(c5)));
 
         // var ext_arr=[];
 
@@ -263,6 +314,9 @@ require([
             }
             map.setExtent(ext1.expand(1.25));
             first = true;
+
+            document.getElementById("dataArray").value = JSON.stringify(data);
+
             document.getElementById("one_b").value = parseInt(stp1);
             document.getElementById("two_b").value = parseInt(stp2 + 1);
             document.getElementById("three_b").value = parseInt(stp3 + 1);
@@ -275,11 +329,11 @@ require([
             document.getElementById("four_a").innerHTML = parseInt(stp5);
             document.getElementById("five_a").value = parseInt(top);
 
-            document.getElementById("one_c").style.backgroundColor = "rgb(56, 168, 0)";
-            document.getElementById("two_c").style.backgroundColor = "rgb(139, 209, 0)";
-            document.getElementById("three_c").style.backgroundColor = "rgb(255, 255, 0)";
-            document.getElementById("four_c").style.backgroundColor = "rgb(255, 128, 0)";
-            document.getElementById("five_c").style.backgroundColor = "rgb(254, 0, 0)";
+            document.getElementById("one_c").style.backgroundColor = "rgb(56, 168, 0,0.5)";
+            document.getElementById("two_c").style.backgroundColor = "rgb(139, 209, 0,0.5)";
+            document.getElementById("three_c").style.backgroundColor = "rgb(255, 255, 0,0.5)";
+            document.getElementById("four_c").style.backgroundColor = "rgb(255, 128, 0,0.5)";
+            document.getElementById("five_c").style.backgroundColor = "rgb(254, 0, 0,0.5)";
 
         });
 
@@ -291,6 +345,7 @@ require([
 
             layer = map.getLayer(l_id);
             map.removeLayer(layer);
+            data = JSON.parse(document.getElementById("dataArray").value);
 
             stp1 = parseFloat(document.getElementById("one_b").value);
             stp2 = parseFloat(document.getElementById("two_b").value);
@@ -306,12 +361,28 @@ require([
             document.getElementById("four_a").innerHTML = parseInt(stp5 - 1);
             document.getElementById("five_a").value = parseInt(top);
 
+            var __map_color = document.getElementById("selectColor");
+            var mc_i = __map_color.options[__map_color.selectedIndex].value;
+            var mc_i = 5 * mc_i;
+
+            document.getElementById("one_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 0] + ")";
+            document.getElementById("two_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 1] + ")";
+            document.getElementById("three_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 2] + ")";
+            document.getElementById("four_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 3] + ")";
+            document.getElementById("five_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 4] + ")";
+
+            c1 = map_colors[mc_i + 0];
+            c2 = map_colors[mc_i + 1];
+            c3 = map_colors[mc_i + 2];
+            c4 = map_colors[mc_i + 3];
+            c5 = map_colors[mc_i + 4];
+
             var ren = new ClassBreaksRenderer(symbol, findvalue)
-            ren.addBreak(stp1, stp2, new SimpleFillSymbol().setColor(new Color([56, 168, 0, 0.5])));
-            ren.addBreak(stp2 + 1, stp3, new SimpleFillSymbol().setColor(new Color([139, 209, 0, 0.5])));
-            ren.addBreak(stp3 + 1, stp4, new SimpleFillSymbol().setColor(new Color([255, 255, 0, 0.5])));
-            ren.addBreak(stp4 + 1, stp5, new SimpleFillSymbol().setColor(new Color([255, 128, 0, 0.5])));
-            ren.addBreak(stp5 + 1, top, new SimpleFillSymbol().setColor(new Color([254, 0, 0, 0.7])));
+            ren.addBreak(stp1, stp2, new SimpleFillSymbol().setColor(new Color(c1)));
+            ren.addBreak(stp2 + 1, stp3, new SimpleFillSymbol().setColor(new Color(c2)));
+            ren.addBreak(stp3 + 1, stp4, new SimpleFillSymbol().setColor(new Color(c3)));
+            ren.addBreak(stp4 + 1, stp5, new SimpleFillSymbol().setColor(new Color(c4)));
+            ren.addBreak(stp5 + 1, top, new SimpleFillSymbol().setColor(new Color(c5)));
 
 
             var fl = get_feature_layer(thematic_region);
