@@ -342,7 +342,6 @@ require([
         //This pulls off the current layer and the renderer and then updates
         //the breaks based on a users input!
         on(updateBreaks, 'click', function () {
-            //console.log(map.graphicsLayerIds.length);
             l_id = map.graphicsLayerIds[0];
 
             layer = map.getLayer(l_id);
