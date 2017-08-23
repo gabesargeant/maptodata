@@ -154,3 +154,45 @@ table.dataTable tr:not(:nth-child(1)):hover {
   text-shadow: -1px 1px #b30000;
   padding: 4px;
 }
+
+.c0 { background-color: rgba(56, 168, 0,0.5)}
+.c1 { background-color: rgba(139, 209, 0,0.5)}
+.c2 { background-color: rgba(255, 255, 0,0.5)}
+.c3 { background-color: rgba(255, 128, 0,0.5)}
+.c4 { background-color: rgba(254, 0, 0,0.5)}
+
+.c5 { background-color: rgba(237,248,251,0.5)}
+.c6 { background-color: rgba(178,226,226,0.5)}
+.c7 { background-color: rgba(102,194,164,0.5)}
+.c8 { background-color: rgba(44,162,95,0.5)}
+.c9 { background-color: rgba(0,109,44,0.5)}
+
+.c10 { background-color: rgba(255,255,178,0.5)}
+.c11 { background-color: rgba(254,204,92,0.5)}
+.c12 { background-color: rgba(253,141,60,0.5)}
+.c13 { background-color: rgba(240,59,32,0.5)}
+.c14 { background-color: rgba(189,0,38,0.5)}
+
+.c15 { background-color: rgba(252,197,192,0.5)}
+.c16 { background-color: rgba(250,159,181,0.5)}
+.c17 { background-color: rgba(247,104,161,0.5)}
+.c18 { background-color: rgba(197,27,138,0.5)}
+.c19 { background-color: rgba(122,1,119,0.5)}
+
+.c20 { background-color: rgba(44,123,182,0.5)}
+.c21 { background-color: rgba(171,217,233,0.5)}
+.c22 { background-color: rgba(255,255,191,0.5)}
+.c23 { background-color: rgba(253,174,97,0.5)}
+.c24 { background-color: rgba(215,25,28,0.5)}
+
+.c25 { background-color: rgba(141,211,199,0.5)}
+.c26 { background-color: rgba(255,255,179,0.5)}
+.c27 { background-color: rgba(190,186,218,0.5)}
+.c28 { background-color: rgba(251,128,114,0.5)}
+.c29 { background-color: rgba(128,177,211,0.5)}
+
+.c30 { background-color: rgba(247,247,247,0.5)}
+.c31 { background-color: rgba(204,204,204,0.5)}
+.c32 { background-color: rgba(150,150,150,0.5)}
+.c33 { background-color: rgba(99,99,99,0.5)}
+.c34 { background-color: rgba(37,37,37,0.5)} 

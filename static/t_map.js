@@ -2,49 +2,49 @@ var map;
 var thematic_code_name;
 
 var map_colors =
-[
-    [56, 168, 0,0.5],
-    [139, 209, 0,0.5],
-    [255, 255, 0,0.5],
-    [255, 128, 0,0.5],
-    [254, 0, 0,0.5],
-    
-    [237,248,251,0.5],
-    [178,226,226,0.5],
-    [102,194,164,0.5],
-    [44,162,95,0.5],
-    [0,109,44,0.5],
-    
-    [255,255,178,0.5],
-    [254,204,92,0.5],
-    [253,141,60,0.5],
-    [240,59,32,0.5],
-    [189,0,38,0.5],
-    
-    [252,197,192,0.5],
-    [250,159,181,0.5],
-    [247,104,161,0.5],
-    [197,27,138,0.5],
-    [122,1,119,0.5],
-    
-    [44,123,182,0.5],
-    [171,217,233,0.5],
-    [255,255,191,0.5],
-    [253,174,97,0.5],
-    [215,25,28,0.5],
-    
-    [141,211,199,0.5],
-    [255,255,179,0.5],
-    [190,186,218,0.5],
-    [251,128,114,0.5],
-    [128,177,211,0.5],
-    
-    [247,247,247,0.5],
-    [204,204,204,0.5],
-    [150,150,150,0.5],
-    [99,99,99,0.5],
-    [37,37,37,0.5]
-    ];   
+    [
+        [56, 168, 0, 0.5],
+        [139, 209, 0, 0.5],
+        [255, 255, 0, 0.5],
+        [255, 128, 0, 0.5],
+        [254, 0, 0, 0.5],
+
+        [237, 248, 251, 0.5],
+        [178, 226, 226, 0.5],
+        [102, 194, 164, 0.5],
+        [44, 162, 95, 0.5],
+        [0, 109, 44, 0.5],
+
+        [255, 255, 178, 0.5],
+        [254, 204, 92, 0.5],
+        [253, 141, 60, 0.5],
+        [240, 59, 32, 0.5],
+        [189, 0, 38, 0.5],
+
+        [252, 197, 192, 0.5],
+        [250, 159, 181, 0.5],
+        [247, 104, 161, 0.5],
+        [197, 27, 138, 0.5],
+        [122, 1, 119, 0.5],
+
+        [44, 123, 182, 0.5],
+        [171, 217, 233, 0.5],
+        [255, 255, 191, 0.5],
+        [253, 174, 97, 0.5],
+        [215, 25, 28, 0.5],
+
+        [141, 211, 199, 0.5],
+        [255, 255, 179, 0.5],
+        [190, 186, 218, 0.5],
+        [251, 128, 114, 0.5],
+        [128, 177, 211, 0.5],
+
+        [247, 247, 247, 0.5],
+        [204, 204, 204, 0.5],
+        [150, 150, 150, 0.5],
+        [99, 99, 99, 0.5],
+        [37, 37, 37, 0.5]
+    ];
 require([
     "dojo/on",
     "esri/map",
@@ -290,8 +290,10 @@ require([
         //of the selected features
         var first = false;
         on(featureLayer, 'update-end', function () {
-            if (first == true)
+            if (first == true) {
                 return;
+            }
+
             var ext_arr = [];
             for (var i = 0; i < featureLayer.graphics.length; i++) {
 
@@ -329,11 +331,11 @@ require([
             document.getElementById("four_a").innerHTML = parseInt(stp5);
             document.getElementById("five_a").value = parseInt(top);
 
-            document.getElementById("one_c").style.backgroundColor = "rgb(56, 168, 0,0.5)";
-            document.getElementById("two_c").style.backgroundColor = "rgb(139, 209, 0,0.5)";
-            document.getElementById("three_c").style.backgroundColor = "rgb(255, 255, 0,0.5)";
-            document.getElementById("four_c").style.backgroundColor = "rgb(255, 128, 0,0.5)";
-            document.getElementById("five_c").style.backgroundColor = "rgb(254, 0, 0,0.5)";
+            document.getElementById("one_c").className = "c" + 0;
+            document.getElementById("two_c").className = "c" + 1;
+            document.getElementById("three_c").className = "c" + 2;
+            document.getElementById("four_c").className = "c" + 3;
+            document.getElementById("five_c").className = "c" + 4;
 
         });
 
@@ -364,12 +366,12 @@ require([
             var __map_color = document.getElementById("selectColor");
             var mc_i = __map_color.options[__map_color.selectedIndex].value;
             var mc_i = 5 * mc_i;
-
-            document.getElementById("one_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 0] + ")";
-            document.getElementById("two_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 1] + ")";
-            document.getElementById("three_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 2] + ")";
-            document.getElementById("four_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 3] + ")";
-            document.getElementById("five_c").style.backgroundColor = "rgb(" + map_colors[mc_i + 4] + ")";
+            
+            document.getElementById("one_c").className = "c" + (mc_i + 0);
+            document.getElementById("two_c").className = "c" + (mc_i + 1);
+            document.getElementById("three_c").className = "c" + (mc_i + 2);
+            document.getElementById("four_c").className = "c" + (mc_i + 3);
+            document.getElementById("five_c").className = "c" + (mc_i + 4);
 
             c1 = map_colors[mc_i + 0];
             c2 = map_colors[mc_i + 1];
