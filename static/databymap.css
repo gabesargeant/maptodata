@@ -47,9 +47,19 @@
   	display: none;
 }
 
+#mapLegend{
+	background-color: #ffffff;
+	position: absolute;
+	top: 560px;
+	left:20px
+}
 
+.acenter{
+	text-align: center;
+}
 #mapLegend > td{
 	width:250px;
+
 
 }
 
