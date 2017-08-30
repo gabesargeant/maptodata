@@ -4,6 +4,8 @@
 	 color: #444444;
 	 height: 100%;
  }
+
+
 #map{
 	min-height: 80%;
 	height:80%;
@@ -57,6 +59,7 @@
 .acenter{
 	text-align: center;
 }
+
 #mapLegend > td{
 	width:250px;
 
@@ -129,9 +132,10 @@ table.dataTable tr:not(:nth-child(1)):hover {
 	color: #fff;
 	background-color: #6496c8;
 	text-shadow: -1px 1px #417cb8;
-	border: none;
+	border: solid 1px #000;
 	padding: 4px;
 }
+
 
 .btn:hover {
   background-color: #346392;
@@ -145,11 +149,30 @@ table.dataTable tr:not(:nth-child(1)):hover {
   padding: 4px;
 }
 
+.greenBtn{
+	color: #fff;
+	background-color: #14AE1E;
+	text-shadow: -1px 1px #186401;
+	border: solid 1px #000;
+	padding: 4px;
+}
+.greenBtn:hover {
+	background-color: #0B7112;
+	text-shadow: -1px 1px #104200;
+	padding: 4px;
+  }
+  
+.greenBtn:active {
+	background-color: #0B7112;
+	text-shadow: -1px 1px #104200;
+	padding: 4px;
+  }
+
 .redbtn{
 	color: #fff;
 	background-color: #ff4d4d;
 	text-shadow: -1px 1px #ff4d4d;
-	border: none;
+	border: solid 1px #000;
 	padding: 4px;
 }
 
@@ -163,6 +186,20 @@ table.dataTable tr:not(:nth-child(1)):hover {
   background-color: #b30000;
   text-shadow: -1px 1px #b30000;
   padding: 4px;
+}
+
+.floatingControls{
+	position: absolute;
+	z-index: 100;
+	left: 120px;
+	margin-top: 25px;
+	margin-right: 50px;
+	border: solid 1px #000;
+	padding-top: 3px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-bottom: 3px;
+	line-height: 35px;
 }
 
 .c0 { background-color: rgba(56, 168, 0,0.5)}
@@ -205,4 +242,13 @@ table.dataTable tr:not(:nth-child(1)):hover {
 .c31 { background-color: rgba(204,204,204,0.5)}
 .c32 { background-color: rgba(150,150,150,0.5)}
 .c33 { background-color: rgba(99,99,99,0.5)}
-.c34 { background-color: rgba(37,37,37,0.5)} 
+.c34 { background-color: rgba(37,37,37,0.5)}
+
+.c35 { background-color: rgba(255,255,255,0.8)}
+
+
+.select-style {
+	border: 1px solid #000;
+	padding: 5px 8px;
+	background-color: rgba(247,247,247,0.5);
+}

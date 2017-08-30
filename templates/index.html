@@ -5,8 +5,8 @@
 
 
 
-<input type="button" class="btn" onclick="_hideShowResultDiv('expand')" value="Census response fields">
-<label class="lbl" for="toggle"><em>Click</em> to <b>Show</b> and <b>hide</b> fields that you can view data about (There are about ~8000)</label>
+<input type="button" class="greenBtn" onclick="_hideShowResultDiv('expand')" value="Census response fields">
+<label class="lbl" for="toggle"><b>Click</b> to <b>Show</b> and <b>hide</b> fields that you can view data about (There are about ~8000)</label>
 <div id="expand">
   <section>
     <p>
@@ -180,41 +180,40 @@
     </p>
   </section>
 </div>
+<hr/> 
 
-<hr/> ||| Select an Area <select id="selectLayer" name="selectLayer">
-            
+<div id="map">
+  <div class="floatingControls c35">
+  <select id="selectLayer" name="selectLayer" class="select-style">
+            <option value="0" selected="selected">Select the Level of Detail</option>
             <option value="0">Australia</option>
             <option value="1">State/Territory</option>
             <option value="2">Statistical Area Level 4</option>
             <option value="3">Statistical Area Level 3</option>
             <option value="4">Statistical Area Level 2</option>
-            <option value="5">Statistical Area Level 1</option>
-            <option value="6">State Suburbs</option>
-            <option value="7">Postal Areas</option>
+            <option value="5">Statistical Area Level 1 (Zoom in!)</option>
+            <option value="6">State Suburbs (Zoom in!)</option>
+            <option value="7">Postal Areas (Zoom in!)</option>
             <option value="8">Greater Capital City Statistical Areas</option>
             <option value="9">Commonwealth Electoral Divisions</option>
             <option value="10">State Electoral Divisions</option>
             <option value="11">Local Government Areas</option>
              
-          </select> |||
-<input name="drawPolygon" type="button" id="drawPolygon" value="Select Polygon"   class="btn" />
-<input name="drawRectangle" type="button" id="drawRectangle" value="Select Rectangle"  class="btn" />
-<input name="drawPoint" type="button" id="drawPoint" value="Select Point"  class="btn" /> |||
-<input name="Reset" type="button" id="Reset" value="Reset"  class="btn" /> |||
-<input type="hidden" id="fieldsArr" name="fieldsArr" value="" />
-<input name="getData" type="submit" id="getData" value="Get Data"  class="redbtn"/>
-
-</form>
-|||
-<hr/>
-<div id="map">
+          </select> 
+          &nbsp;&nbsp;&nbsp;
+    <input name="drawPolygon" type="button" id="drawPolygon" value="Select a Polygon"   class="btn" /> OR
+      <input name="drawRectangle" type="button" id="drawRectangle" value="Select a Rectangle"  class="btn" /> OR
+      <input name="drawPoint" type="button" id="drawPoint" value="Select a Point"  class="btn" /> &nbsp;&nbsp;&nbsp;
+      <input name="Reset" type="button" id="Reset" value="Reset"  class="greenBtn" /> &nbsp;&nbsp;&nbsp; 
+      <input type="hidden" id="fieldsArr" name="fieldsArr" value="" />
+      <input name="getData" type="submit" id="getData" value="Get Data"  class="redbtn"/>
+      </div>
   <img id="loadingImg" src="static/img/loading.gif" />
 </div>
+</form>
 <hr/>
 Made by Gabriel Sargeant 2017. The JS and Python is at <a href="https://github.com/gabesargeant/maptodata" target="_blank">my github repo</a>. More to follow on the DB setup etc.
 <script type=text/javascript>
   $SCRIPT_ROOT = {{ request.script_root|tojson }};
-
 </script>
-
 {%endblock%}

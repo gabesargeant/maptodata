@@ -59,57 +59,57 @@ require([
         var ste = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/18", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var sa4 = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/15", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var sa3 = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/14", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var sa2 = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/13", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var sa1 = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/12", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var ssc = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/17", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var poa = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/11", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var gccsa = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/4", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var ced = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/2", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var sed = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/16", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
         var lga = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/8", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible:false
+            visible: false
         });
 
 
@@ -191,7 +191,7 @@ require([
                     map.setZoom(7);
                     break;
                 case '4':
-                    map.setZoom(8);
+                    map.setZoom(7);
                     break;
                 case '5':
                     map.setZoom(12);
@@ -219,9 +219,6 @@ require([
         }
 
         on(dom.byId('selectLayer'), 'change', function (e) {
-            //map.setZoom(16);
-            //
-
 
             zoomLevel(e.target.value);
             if (e.target.value === 999) {
@@ -243,11 +240,11 @@ require([
             currentLayer = layer; //applies visible layer to current layer for selection query.
             // if (currentSelection != null) {
             //     layer.selectFeatures(currentSelection); //passes the selection to the new layer.
-            //     console.log("current selection was passed to the new layer");
+            //     //console.log("current selection was passed to the new layer");
             // }
-            // clearSelectedAreas();
+            //clearSelectedAreas();
             currentSelection = null;
-            // addData();  
+             
         });
 
 
