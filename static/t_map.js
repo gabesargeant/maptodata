@@ -51,6 +51,8 @@ require([
     "esri/layers/FeatureLayer",
     "esri/geometry/Extent",
     "esri/InfoTemplate",
+    "esri/symbols/TextSymbol",
+    "esri/layers/LabelClass",
     "esri/symbols/SimpleLineSymbol",
     "esri/symbols/SimpleFillSymbol",
     "esri/renderers/SimpleRenderer",
@@ -63,6 +65,8 @@ require([
     FeatureLayer,
     Extent,
     InfoTemplate,
+    TextSymbol,
+    LabelClass,
     SimpleLineSymbol,
     SimpleFillSymbol,
     SimpleRenderer,
@@ -73,7 +77,8 @@ require([
         map = new Map("map", {
             basemap: "streets",
             center: [133.25, -24.15],
-            zoom: 4
+            zoom: 4,
+            showLabels: true
         });
 
         //var infoTemplate = new InfoTemplate("${NAME}", "${*}");
@@ -95,7 +100,7 @@ require([
             infoTemplate.setTitle(name);
 
             var cdx = graphic.attributes[thematic_region];
-            var val = "<br/>No Data Avalible, Sorry!";
+            var val = "<br/>No Data available, Sorry!";
             for (var i = 0; i < data.length; i++) {
 
                 if (cdx.localeCompare(data[i][0]) == 0) {
@@ -238,9 +243,8 @@ require([
         line.setStyle(SimpleLineSymbol.SOLID);
         line.setColor(new Color([225, 0, 0, 0.5]));
 
-        var symbol = new SimpleFillSymbol(null);
-        symbol.setColor(new Color([1, 1, 1, 0.0]));
-        symbol.setOutline(line);
+        var symbol = new SimpleFillSymbol();
+        symbol = symbol.setOutline(line);
 
         var stp = min_max[2]; //Even breaks to start with.
 
@@ -282,11 +286,22 @@ require([
             return val;
         }
 
+        //////////////////////////////
+        var label_text = new TextSymbol().setColor((new Color("#000")));
+        label_text.font.setSize("12pt");
+        label_text.font.setFamily("arial");
+        var json_label = {
+            "labelExpressionInfo": { "value": "{" + thematic_code_name + "}" }
+        };
+        var labelClass = new LabelClass(json_label);
+        labelClass.symbol = label_text;
+        //Doesn't get set on the first one
+
+        //Adding the renderer////
         featureLayer.setRenderer(ren);
         map.addLayer(featureLayer);
 
-
-        //We run this on the first time the map runs to zoom in to the extent
+        //I run this on the first time the map runs to zoom in to the extent
         //of the selected features
         var first = false;
         on(featureLayer, 'update-end', function () {
@@ -340,7 +355,7 @@ require([
         });
 
         //This pulls off the current layer and the renderer and then updates
-        //the breaks based on a users input!
+        //the breaks based on a users input, labels different colors etc!
         on(updateBreaks, 'click', function () {
             l_id = map.graphicsLayerIds[0];
 
@@ -365,7 +380,7 @@ require([
             var __map_color = document.getElementById("selectColor");
             var mc_i = __map_color.options[__map_color.selectedIndex].value;
             var mc_i = 5 * mc_i;
-            
+
             document.getElementById("one_c").className = "c" + (mc_i + 0);
             document.getElementById("two_c").className = "c" + (mc_i + 1);
             document.getElementById("three_c").className = "c" + (mc_i + 2);
@@ -389,6 +404,10 @@ require([
             var fl = get_feature_layer(thematic_region);
 
             fl.setRenderer(ren);
+            if (document.getElementById("check_label").checked == true) {
+                fl.setLabelingInfo([labelClass]);
+            }
+
             map.addLayer(fl);
 
 
