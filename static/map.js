@@ -55,11 +55,12 @@ require([
         var aus = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/1", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
+            visible: false
         });
         var ste = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/18", {
             mode: FeatureLayer.MODE_ONDEMAND,
             outFields: ["*"],
-            visible: false
+            
         });
         var sa4 = new FeatureLayer("https://geo.abs.gov.au/arcgis/rest/services/ASGS2016/SEARCH/MapServer/15", {
             mode: FeatureLayer.MODE_ONDEMAND,
@@ -160,7 +161,7 @@ require([
         map.addLayer(lga);
 
         //aus.hide();current
-        currentLayer = aus;
+        currentLayer = ste;
 
         on(dom.byId('drawPolygon'), 'click', function () {
             clearSelectedAreas();

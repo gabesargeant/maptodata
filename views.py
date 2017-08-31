@@ -25,7 +25,7 @@ def get_columns():
     col_no = request.args.get('col_no', 0, type=str)
     print(col_no)
     result = name_column.get_json_columns(col_no)
-    print("getting this far")
+    
     return jsonify(result=result)
 
 @app.route("/data", methods=['POST'])

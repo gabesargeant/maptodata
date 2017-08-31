@@ -2,7 +2,7 @@
  	font-family: Verdana, Geneva, sans-serif;
  	font-size: 10pt;
 	 color: #444444;
-	 height: 100%;
+	 height: 99%;
  }
 
 
@@ -52,8 +52,9 @@
 #mapLegend{
 	background-color: #ffffff;
 	position: absolute;
-	top: 560px;
-	left:20px
+	bottom:18%;
+	left:20px;
+	z-index: 100;
 }
 
 .acenter{
@@ -252,3 +253,13 @@ table.dataTable tr:not(:nth-child(1)):hover {
 	padding: 5px 8px;
 	background-color: rgba(247,247,247,0.5);
 }
+
+.modal{
+
+	 background: rgba(0,0,0,.6);
+	 position: fixed;
+	 top: 0; left: 0; right: 0; bottom: 0; 
+	 z-index: 100;
+   }
+
+ 
