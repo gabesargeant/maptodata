@@ -10,7 +10,7 @@ with open('./app/name_column.json') as data_file:
     COL_NAME_DICT = json.load(data_file)
 
 
-#Column names for ajax. Not really huge but easier than the continious 
+#Column names for ajax. Not really huge but easier than the continious
 # ajax calls.
 
 with open('./app/static/json/01.json') as data_file:

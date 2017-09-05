@@ -262,4 +262,8 @@ table.dataTable tr:not(:nth-child(1)):hover {
 	 z-index: 100;
    }
 
+
+.faq_content{
+	width: 40%;
+}
  

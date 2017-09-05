@@ -1,0 +1,122 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="faq_content">
+    <p/>
+    <h3>This is the catch all FAQ, help guide and explanation on how I built this site and the specific components that I used.</h3>
+    <p/>
+    <p/>
+
+    <h3><b>0. What's this site about?</b></h3>
+    <p/> Data about people in places in Australia.....
+    <p/> In August last year everyone in Australia tried to do the Census. Then the website crashed....a couple days later things
+    were repaired and  the Census was collected. When the ABS collects data it has to turn that data into a product it can
+    distribute to the public. For the census there are a ton of products that get built and released. In my opinion the best
+    census product that the ABS creates is the Census Data Packs. It is about as close as you can get to a raw dataset of
+    Australian population data. The Data Packs are comprised simply of a sets flat CSV files with very little noise around
+    the data (and a bare minimum of Excel spreadsheets).
+    <p/> If you break down what the census is you get  too at a basic level "data about people in places"
+    <p/> Thinking about it from that level I decided to create a site that allows you to select attributes about people and then
+    select an area of inquiry. It's a visual / map driven search of a geographically tagged database.
+    <p/> This site allows you to search 12 different geographic levels of detail in Australia, across ~8000 reported or imputed
+    response fields. If you sum up the total number of Statistical Areas, Electoral Districts, postcodes and suburbs in Australia
+    you get about 74000 areas that the database can provide numbers on. ~74,000 * ~8000 response fields gives you around
+    590 Million cells in this database.
+    <h3><b> 1. Limits</b></h3>
+    In short: <br/> A single request from a user can get data on up to 10 response fields, and up to 1000 geographic areas
+    from the same geographic level of detail. This returns a table of 10,000 cells. Which is enough for a single web page
+    coming in at under 80-100KB
+    <p/> These limits exist to ease the strain on your bandwidth, and to limit the strain on the tiny EC2-micro instance that
+    is running this site.   If you want access to the whole dataset then feel free to download it for free from the ABS.
+    <p/>
+    <h3><b>2. How was this site made, whats it run on and where did the DB come from?</b></h3>
+    <p/> Its all fairly simple but I did make some choices on the way which I would change on a second go.
+    <p/> I'll start with the site itself then the DB and then the AWS server that is hosting it.
+    <p/>
+    <ul>
+        <li>
+            <b> The site</b>
+            <p/> The website is A staggering 4 pages.<br> It uses the following technologies:
+            <ul>
+                <li>
+                    Python </li>
+                <li>
+                    The Python Flask framework as the server side scripting component.</li>
+                <li>
+                    Jinja2 for templating </li>
+                <li>
+                    HTML5/CSS</li>
+                <li>
+                    Javascript - The usual stuff here, colors values etc. </li>
+                <li>
+                    More Javascript, the Esri JS API and JQuery to glue the maps and forms together.</li>
+            </ul>
+            <p/> The code is pretty self explanatory. For the first page I load a bunch of layers from the ABS map servers then
+            hide them and listen out for form changes in the select box to show them to the user. These selections also are
+            tied to zoom levels that hint to the user that if they want to look at SA1 areas in Australia then they should
+            zoom in.
+        </li>
+        <li><b>The DB</b>
+            <p/> The db is a mysql database of just over 65 tables, One table is an index that maps column names to tables that
+            they exist in. There is another that does Short header names to long headers for the columns and the rest are
+            just table of data.
+            <p/> The DB is simple and I think the way I constructed it is the easiest way to put it together.
+            <p/> The design is base don the following.
+            <p/> Each geography has a unique identifier, not only to itself but unique amongst each other geography. The SA4
+            with some code of (An SA4 code) will be unique to not only the other SA4s but all the SA3, 2, post codes etc
+            etc. Sounds like a good candidate for a primary key!
+            <p/> In addition to this the ABS kept the columns consistent between areas. You get the sum of an area if you look
+            at its related encompassing geography at a lower level of detail.
+            <p/> The DB is doing lots of reads and no writes!
+            <br/> This made the the DB really easy to construct after a lot of thinking.
+            <br/> I used the Linux 'head' tool and clipped the first line off each of the datapacks. I then flipping those
+            into a text file and using the MySQL developer 'Create Multiple Tables' option to feed in the structure. It spat
+            out an empty Schema Which I forward engineered into a db. From here it was just a matter of scripting about ~800
+            mysql 'load data local infiles' operations to get the job done.
+            <p/> Another great win was the datapacks are all Integer numbers. That made things really nice an easy. I also had
+            to replace a few things (See the Errata), so the usual, cat, sed and such were used to smooth over a few bumps.
+        </li>
+        <li> <b>The AWS Server</b>
+            <p/> Really simple here too:
+            <ul>
+                <li>
+                    * Ubuntu Server 16.04 LTS</li>
+                <li>
+                    * AWS EC2.Micro 1gig of ram and 8 gig hard drive (Free Tier)</li>
+                <li>
+                    * Nginx Webserver mapped to,</li>
+                <li>
+                    * GreenUnicorn Python Server (These last too were a little complex)</li>
+
+            </ul>
+        </li>
+    </ul>
+    <p/>
+    <p/>
+    <h3><b>6. Why did I make this site..</b></h3>
+    <p/> Why not!
+    <p/> Also, I wanted to do thematic mapping with the Esri ArcGIS JS framework and I wanted to build something that was fairly
+    stable and hooked into a large number of external services.
+    <p/>
+    <p/>
+
+    <h3>>b>7. Errata and metadata</b></h3>
+    <p/> There are a number of fields in the Data Packs that feature a ".." instead of a number. This signifies that the collected
+    number was too small to report or too small to be significant.<br/> It also means the number is so small that it may
+    have lead to the perception or reality that an individual could be identified in an area based on the characteristic.
+    <p/> The ABS suppresses these fields with a "..".
+    <p/> The database I constructed is based on numbers. To avoid errors with the data and to allow the data to feed into visualization
+    frameworks with greater ease. I have modified all ".." to be reported as zeros. This is how the ABS did this in the past
+    and it just makes the tech work a bit smother in some areas. But it shouldn't change the outcome for any other data.
+    <p/>
+    Totals.....The original Data Packs feature a totals column for most response categories, which is kind of odd. I have
+    clipped those out of the response field selection options. If you want column or row totals then R, Excel or Calc etc
+    can provide those easily for you. The reason I got rid of them relates to the way I created the database and column names
+    and the python code that does the look-up. Its a constraint but a small one at that.
+    <p/>
+    <p/>
+
+    I made this and that. Gabe Sargeant 2017
+
+</div>
+
+<hr/> {%endblock%}

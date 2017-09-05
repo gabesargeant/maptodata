@@ -25,7 +25,7 @@ def get_columns():
     col_no = request.args.get('col_no', 0, type=str)
     print(col_no)
     result = name_column.get_json_columns(col_no)
-    
+
     return jsonify(result=result)
 
 @app.route("/data", methods=['POST'])
@@ -143,6 +143,13 @@ def back_home():
                            title='Data on a Map!',
                            column=column)
 
+@app.route("/faq", methods=['GET'])
+def faq():
+    """
+    Off too the FAQ we go.
+    """
+    return render_template('faq.html',
+                           title='FAQ and stuff about Data and maps')
 
 @app.errorhandler(404)
 def error_redirect(err):
@@ -155,11 +162,11 @@ def error_redirect(err):
                            error=error)
 
 @app.errorhandler(500)
-def error_redirect(err):
+def error_redirect1(err):
     """
     Redirect all 404's back to index.
     """
     error = err
     return render_template('error.html',
-                          title='Something went wrong!',
-                          error=error)
+                           title='Something went wrong!',
+                           error=error)
