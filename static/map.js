@@ -192,7 +192,7 @@ require([
                     map.setZoom(7);
                     break;
                 case '4':
-                    map.setZoom(7);
+                    map.setZoom(9);
                     break;
                 case '5':
                     map.setZoom(12);

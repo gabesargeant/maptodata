@@ -265,9 +265,16 @@ table.dataTable tr:not(:nth-child(1)):hover {
 	 z-index: 100;
    }
 
-
 .faq_content{
-	width: 40%;
+	margin:0 auto;
+	max-width: 600px;
 	text-align: justify
+}
+
+.grey{
+	background-color: rgba(171,217,233,0.5);
+	text-align: center;
+	overflow: hidden;
+	
 }
  

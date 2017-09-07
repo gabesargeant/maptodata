@@ -1,23 +1,43 @@
 {% extends "base.html" %} {% block content %}
-
 <div class="faq_content">
     <p/>
     <h3>This is the catch all FAQ, help guide and explanation on how I built this site and the specific components that I used.</h3>
     <p/>
     <p/>
-
+    <h3><b>-1. Really quickly, how does this work?</b></h3>
+    <p/>
+    <p/>
+    <b>Select some fields</b><br/>
+    <div class="grey"><img src="/static/img/fields.jpg" /></div>
+    <p/>
+    <b>Select a level of detail.</b><br/>
+    <div class="grey"><img src="/static/img/lod.png" /><br/></div>
+    <p/>
+    <b>Select an area. Either a polygon, rectable or point</b><br/>
+    <div class="grey">
+    <img src="/static/img/select1.jpg" /></div>
+    <p/>
+    <b>Get data or reset if you mess it up!</b><br/>
+    <div class="grey"><img src="/static/img/getreset.jpg" /></div>
+    <p/>
+    <b>If you get to data, Give the Visualise Button a click!</b><br/>
+    <div class="grey"><img src="/static/img/viz.png" /></div>
+    <p/>
+    <b>Just keep playing about, if you get this far, you'll enjoy the thematic mapping. The rest is discoverable</b><br/>
+    <p/>
+    <p/>
+    <p/>
     <h3><b>0. What's this site about?</b></h3>
     <p/> Data about people in places in Australia.....
     <p/> In August last year everyone in Australia tried to do the Census. Then the website crashed....a couple days later things
-    were repaired and the Census was collected.  
+    were repaired and the Census was collected.
+    <p/> This is that data....
     <p/>
-    This is that data
-    <p/>
-    Whenever the ABS collects data it has to turn that data into a product it can
-    distribute to the public. <br/>For the census there are a ton of products that get built and released. In my opinion the best
-    census product that the ABS creates is the Census Data Packs. It is about as close as you can get to a raw dataset of
-    Australian population data. The Data Packs are comprised simply of a sets flat CSV files with very little noise around
-    the data (and a bare minimum of Excel spreadsheets).
+    <p/> Whenever the ABS collects data it has to turn that data into a product it can distribute to the public. <br/>For the
+    census there are a ton of products that get built and released. In my opinion the best census product that the ABS creates
+    is the Census Data Packs. It is about as close as you can get to a raw dataset of Australian population data. The Data
+    Packs are comprised simply of a sets flat CSV files with very little noise around the data (and a bare minimum of Excel
+    spreadsheets).
     <p/> If you break down what the census is you get to at a basic theme of "data about people in places"
     <p/> Thinking about it from that level I decided to create a site that allows you to select attributes about people and then
     select an area of inquiry. It's a visual / map driven search of a geographically tagged database.
@@ -25,7 +45,7 @@
     response fields. If you sum up the total number of Statistical Areas, Electoral Districts, postcodes and suburbs in Australia
     you get about 74000 areas that the database can provide numbers on. ~74,000 * ~8000 response fields gives you around
     590 Million cells in the database.
-    
+
     <h3><b> 1. Limits</b></h3>
     In short: <br/> A single request from a user can get data on up to 10 response fields, and up to 1000 geographic areas
     from the same geographic level of detail. This returns a table of 10,000 cells. Which is enough for a single web page
@@ -95,49 +115,43 @@
             </ul>
         </li>
     </ul>
-    <p/>
-    Next time I do this, I will use sqlite for the DB as its better supported with python than MySQL.
+    <p/> Next time I do this, I will use sqlite for the DB as its better supported with python than MySQL.
     <p/>
     <h3><b>3. Why did I make this site..</b></h3>
     <p/> Why not!
-    <p/> Also, I wanted to do thematic mapping with the Esri ArcGIS JS framework.
-    Its a good challenge to build something that is fairly
-    stable and hooks into a large number of external services. <p/>And big databases are good fun.
+    <p/> Also, I wanted to do thematic mapping with the Esri ArcGIS JS framework. Its a good challenge to build something that
+    is fairly stable and hooks into a large number of external services.
+    <p/>And big databases are good fun. And i wanted to learn python and the flask framework!
     <p/>
     <p/>
     <h3><b>4. What external services?</b></h3>
-    <p/>
-    My tiny website doesn't really do all that much. When you connect to it, the server passes you back some javascript and data. 
-    Your browser then makes many calls out to the web to CDN's for information and extra code. 
-    Your browser is pretty much assembling a program on the fly that does this mapping. All I do is specify numbers / colors and some basic styling.
-    <p/>
-    Writing it down, it doesn't seem like much, but some of this was hard. At least for me.
-    <p/>
-    So your browser hits up Google(JQuery), Esri (basemaps and js framework), and the ABS (maps) for data and then put it all together in the form of this sight.<p/>
-    My server just passes along the data.
+    <p/> My tiny website doesn't really do all that much. When you connect to it, the server passes you back some javascript
+    and data. Your browser then makes many calls out to the wider web. More to the point it reaches out to a few CDN's for
+    information and extra code. Your browser is pretty much assembling a program on the fly that does this mapping. All I
+    do is specify numbers / colors and some basic styling.
+    <p/> Writing it down, it doesn't seem like much, but some of this was hard. I assure you!.
+    <p/> So your browser hits up Google(JQuery), Esri (basemaps and js framework), and the ABS (maps) for data and then put it
+    all together in the form of this sight.
+    <p/> My server just passes along the data.
     <p/>
     <p/>
     <h3>5. What were some of the hard parts of this?</h3>
-    <p/>
-    Australia is big, but dense and empty. All at once! <br/>
-    Sorry Aulbry, and Townsville and other medium sized centers. Most of Australia lives in 8 cities. To be honest it's 3. 
-    Heat maps and regular visualization techniques don't work so well unless you zoom right in. <br/>
-    Hence why I have auto zoom on some of the more detailed areas.
-    <p/>
-    The Esri framework can also be a challenge, Its got a fairly steep learning curve. I also kind of hate Javascript.
-    <p/>
-    The database took about 3 weeks to build/script. 
-    <br/>Once I had it all scripted. The script takes about 15 minutes to parse the files, generate a schema and then import the data.
+    <p/> Australia is big, but dense and empty. All at once! <br/> Sorry Aulbry, and Townsville and other medium sized centers.
+    Most of Australia lives in 8 cities. To be honest it's 3. Heat maps and regular visualization techniques don't work so
+    well unless you zoom right in. <br/> Hence why I have auto zoom on some of the more detailed areas.
+    <p/> The Esri framework can also be a challenge, Its got a fairly steep learning curve. I also kind of hate Javascript.
+    <p/> The database took about 3 weeks to build/script.
+    <br/>Once I had it all scripted. The script takes about 15 minutes to parse the files, generate a schema and then import
+    the data.
     <p/>
     <p/>
 
     <h3><b>6. Things that you would suggest to the ABS to include in datapacks?</b></h3>
-    The ABS should either develop a CRAN package for R that holds all the Census data or 
-    it should provide DB scripts that construct tables for people to use in their own systems. 
+    The ABS should either develop a CRAN package for R that holds all the Census data or it should provide DB scripts that construct
+    tables for people to use in their own systems.
+    <p/> I may have a go at the CRAN package... maybe...
     <p/>
-    I may have a go at the CRAN package... maybe...
-    <p/>
-    
+
 
     <h3><b>7. Errata and metadata</b></h3>
     <p/> There are a number of fields in the Data Packs that feature a ".." instead of a number. This signifies that the collected
@@ -147,17 +161,14 @@
     <p/> The database I constructed is based on numbers. To avoid errors with the data and to allow the data to feed into visualization
     frameworks with greater ease. I have modified all ".." to be reported as zeros. This is how the ABS did this in the past
     and it just makes the tech work a bit smother in some areas. But it shouldn't change the outcome for any other data.
-    <p/>
-    Totals.....The original Data Packs feature a totals column for most response categories, which is kind of odd. I have
+    <p/> Totals.....The original Data Packs feature a totals column for most response categories, which is kind of odd. I have
     clipped those out of the response field selection options. If you want column or row totals then R, Excel or Calc etc
     can provide those easily for you. The reason I got rid of them relates to the way I created the database and column names
-    and the python code that does the look-up. Its a constraint but a small one at that.
+    and the python code that does the look-up. It's a constraint but a small one at that.
     <p/>
-    <p/>
+    <p/> I made this and that.
+    <p/> Made by Gabriel Sargeant 2017. The JS and Python is at <a href="https://github.com/gabesargeant/maptodata" target="_blank">my github repo</a>
 
-    I made this and that.<p/>
-    Made by Gabriel Sargeant 2017. The JS and Python is at <a href="https://github.com/gabesargeant/maptodata" target="_blank">my github repo</a>
-    
 
 </div>
 
