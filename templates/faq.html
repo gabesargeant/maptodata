@@ -53,8 +53,8 @@
     <p/> These limits exist to ease the strain on your bandwidth, and to limit the strain on the tiny EC2-micro instance that
     is running this site. If you want access to the whole dataset then feel free to download it for free from the ABS.
     <p/>
-    <h3><b>2. How was this site made, whats it run on and where did the DB come from?</b></h3>
-    <p/> Its all fairly simple tech. I did make some choices on the way which I would change on a second go.
+    <h3><b>2. How was this site made, what does it run on and where did the DB come from?</b></h3>
+    <p/> Its all fairly simple tech. I did make some choices that I would change if I was starting again. But this works, pretty well too.<br/>
     <p/> I'll start with the site itself then the DB and then the AWS server that is hosting it.
     <p/>
     <ul>
@@ -85,9 +85,9 @@
             they exist in. There is another that does Short header names to long headers for the columns and the rest are
             just table of data.
             <p/> The DB is simple and I think the way I constructed it is the easiest way to put it together.
-            <p/> The design is base don the following.
-            <p/> Each geography has a unique identifier, not only to itself but unique amongst each other geography. The SA4
-            with some code of (An SA4 code) will be unique to not only the other SA4s but all the SA3, 2, post codes etc
+            <p/> The design is based on the following facts.
+            <p/> Each geography has a unique identifier, not only to its own classification but also unique amongst each other geographic layer. The SA4
+            with some code of (An SA4 code) will be unique to not only the other SA4s but all the SA3, SA2s, post codes etc
             etc. Sounds like a good candidate for a primary key!
             <p/> In addition to this the ABS kept the columns consistent between areas. You get the sum of an area if you look
             at its related encompassing geography at a lower level of detail.
@@ -97,8 +97,8 @@
             into a text file and using the MySQL developer 'Create Multiple Tables' option to feed in the structure. It spat
             out an empty Schema Which I forward engineered into a db. From here it was just a matter of scripting about ~800
             mysql 'load data local infiles' operations to get the job done.
-            <p/> Another great win was the datapacks are all Integer numbers. That made things really nice an easy. I also had
-            to replace a few things (See the Errata), so the usual, cat, sed and such were used to smooth over a few bumps.
+            <p/> Another great win was the datapacks are all Integer numbers. That made things really nice an easy for data types. <br/>
+            I also had to replace a few things (See the Errata), so the usual, cat, sed and such were used to smooth over a few bumps.
         </li>
         <li> <b>The AWS Server</b>
             <p/> Really simple here too:
@@ -108,14 +108,14 @@
                 <li>
                     AWS EC2.Micro 1gig of ram and 8 gig hard drive (Free Tier)</li>
                 <li>
-                    Nginx Webserver mapped to,</li>
+                    Nginx Webserver mapped too,</li>
                 <li>
-                    GreenUnicorn Python Server (These last too were a little complex)</li>
+                    GreenUnicorn Python Server (These last too were pretty complex to configure in together)</li>
 
             </ul>
         </li>
     </ul>
-    <p/> Next time I do this, I will use sqlite for the DB as its better supported with python than MySQL.
+    <p/> IF I do this again sometime I will use sqlite for the DB as it's better supported with python.
     <p/>
     <h3><b>3. Why did I make this site..</b></h3>
     <p/> Why not!
