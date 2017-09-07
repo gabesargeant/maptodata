@@ -29,7 +29,7 @@ require([
     Ready
 ) {
         map = new Map("map", {
-            basemap: "streets",
+            basemap: "osm",
             center: [133.25, -24.15],
             zoom: 4,
         });

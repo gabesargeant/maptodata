@@ -6,7 +6,7 @@
 
 
 <input type="button" class="greenBtn" onclick="_hideShowResultDiv('expand')" value="Census response fields">
-<label class="lbl" for="toggle"><b>Click</b> to <b>Show</b> and <b>hide</b> fields that you can view data about (There are about ~8000)</label>
+<label class="lbl" for="toggle"> <-- <b>Click</b> to <b>Show</b> and <b>hide</b> fields that you can view data about (There are about ~8000)</label>
 <div id="expand">
   <section>
     <p>
@@ -211,8 +211,6 @@
   <img id="loadingImg" src="static/img/loading.gif" />
 </div>
 </form>
-<hr/>
-Made by Gabriel Sargeant 2017. The JS and Python is at <a href="https://github.com/gabesargeant/maptodata" target="_blank">my github repo</a>. More to follow on the DB setup etc.
 <script type=text/javascript>
   $SCRIPT_ROOT = {{ request.script_root|tojson }};
 </script>

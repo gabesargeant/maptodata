@@ -1,17 +1,20 @@
  html, body{
  	font-family: Verdana, Geneva, sans-serif;
  	font-size: 10pt;
-	 color: #444444;
-	 height: 99%;
+	 color: rgb(68, 68, 68);
+	 height: 97%;
  }
 
 
 #map{
-	min-height: 80%;
+	min-height: 70%;
 	height:80%;
 }
  
-
+.banner{
+	overflow: hidden;
+	text-align: center;
+}
  
  .claro {
  	width: 80%;
@@ -265,5 +268,6 @@ table.dataTable tr:not(:nth-child(1)):hover {
 
 .faq_content{
 	width: 40%;
+	text-align: justify
 }
  

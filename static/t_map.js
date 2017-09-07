@@ -75,14 +75,14 @@ require([
 ) {
 
         map = new Map("map", {
-            basemap: "streets",
+            basemap: "osm",
             center: [133.25, -24.15],
             zoom: 4,
             showLabels: true
         });
 
         //var infoTemplate = new InfoTemplate("${NAME}", "${*}");
-
+        //streets
         // var infoTemplate = new InfoTemplate("${NAME}", "${*}", ""
         // "The number of people that applied under the RRTA from ${country} is approximatley <u><b size=\"12\">" + "${count(*)}\n\
         // </b></u>for details on their case before the RRTA click the following button <br><br><center> \

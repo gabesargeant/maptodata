@@ -9,27 +9,32 @@
     <h3><b>0. What's this site about?</b></h3>
     <p/> Data about people in places in Australia.....
     <p/> In August last year everyone in Australia tried to do the Census. Then the website crashed....a couple days later things
-    were repaired and  the Census was collected. When the ABS collects data it has to turn that data into a product it can
-    distribute to the public. For the census there are a ton of products that get built and released. In my opinion the best
+    were repaired and the Census was collected.  
+    <p/>
+    This is that data
+    <p/>
+    Whenever the ABS collects data it has to turn that data into a product it can
+    distribute to the public. <br/>For the census there are a ton of products that get built and released. In my opinion the best
     census product that the ABS creates is the Census Data Packs. It is about as close as you can get to a raw dataset of
     Australian population data. The Data Packs are comprised simply of a sets flat CSV files with very little noise around
     the data (and a bare minimum of Excel spreadsheets).
-    <p/> If you break down what the census is you get  too at a basic level "data about people in places"
+    <p/> If you break down what the census is you get to at a basic theme of "data about people in places"
     <p/> Thinking about it from that level I decided to create a site that allows you to select attributes about people and then
     select an area of inquiry. It's a visual / map driven search of a geographically tagged database.
     <p/> This site allows you to search 12 different geographic levels of detail in Australia, across ~8000 reported or imputed
     response fields. If you sum up the total number of Statistical Areas, Electoral Districts, postcodes and suburbs in Australia
     you get about 74000 areas that the database can provide numbers on. ~74,000 * ~8000 response fields gives you around
-    590 Million cells in this database.
+    590 Million cells in the database.
+    
     <h3><b> 1. Limits</b></h3>
     In short: <br/> A single request from a user can get data on up to 10 response fields, and up to 1000 geographic areas
     from the same geographic level of detail. This returns a table of 10,000 cells. Which is enough for a single web page
     coming in at under 80-100KB
     <p/> These limits exist to ease the strain on your bandwidth, and to limit the strain on the tiny EC2-micro instance that
-    is running this site.   If you want access to the whole dataset then feel free to download it for free from the ABS.
+    is running this site. If you want access to the whole dataset then feel free to download it for free from the ABS.
     <p/>
     <h3><b>2. How was this site made, whats it run on and where did the DB come from?</b></h3>
-    <p/> Its all fairly simple but I did make some choices on the way which I would change on a second go.
+    <p/> Its all fairly simple tech. I did make some choices on the way which I would change on a second go.
     <p/> I'll start with the site itself then the DB and then the AWS server that is hosting it.
     <p/>
     <ul>
@@ -79,27 +84,62 @@
             <p/> Really simple here too:
             <ul>
                 <li>
-                    * Ubuntu Server 16.04 LTS</li>
+                    Ubuntu Server 16.04 LTS</li>
                 <li>
-                    * AWS EC2.Micro 1gig of ram and 8 gig hard drive (Free Tier)</li>
+                    AWS EC2.Micro 1gig of ram and 8 gig hard drive (Free Tier)</li>
                 <li>
-                    * Nginx Webserver mapped to,</li>
+                    Nginx Webserver mapped to,</li>
                 <li>
-                    * GreenUnicorn Python Server (These last too were a little complex)</li>
+                    GreenUnicorn Python Server (These last too were a little complex)</li>
 
             </ul>
         </li>
     </ul>
     <p/>
+    Next time I do this, I will use sqlite for the DB as its better supported with python than MySQL.
     <p/>
-    <h3><b>6. Why did I make this site..</b></h3>
+    <h3><b>3. Why did I make this site..</b></h3>
     <p/> Why not!
-    <p/> Also, I wanted to do thematic mapping with the Esri ArcGIS JS framework and I wanted to build something that was fairly
-    stable and hooked into a large number of external services.
+    <p/> Also, I wanted to do thematic mapping with the Esri ArcGIS JS framework.
+    Its a good challenge to build something that is fairly
+    stable and hooks into a large number of external services. <p/>And big databases are good fun.
+    <p/>
+    <p/>
+    <h3><b>4. What external services?</b></h3>
+    <p/>
+    My tiny website doesn't really do all that much. When you connect to it, the server passes you back some javascript and data. 
+    Your browser then makes many calls out to the web to CDN's for information and extra code. 
+    Your browser is pretty much assembling a program on the fly that does this mapping. All I do is specify numbers / colors and some basic styling.
+    <p/>
+    Writing it down, it doesn't seem like much, but some of this was hard. At least for me.
+    <p/>
+    So your browser hits up Google(JQuery), Esri (basemaps and js framework), and the ABS (maps) for data and then put it all together in the form of this sight.<p/>
+    My server just passes along the data.
+    <p/>
+    <p/>
+    <h3>5. What were some of the hard parts of this?</h3>
+    <p/>
+    Australia is big, but dense and empty. All at once! <br/>
+    Sorry Aulbry, and Townsville and other medium sized centers. Most of Australia lives in 8 cities. To be honest it's 3. 
+    Heat maps and regular visualization techniques don't work so well unless you zoom right in. <br/>
+    Hence why I have auto zoom on some of the more detailed areas.
+    <p/>
+    The Esri framework can also be a challenge, Its got a fairly steep learning curve. I also kind of hate Javascript.
+    <p/>
+    The database took about 3 weeks to build/script. 
+    <br/>Once I had it all scripted. The script takes about 15 minutes to parse the files, generate a schema and then import the data.
     <p/>
     <p/>
 
-    <h3>>b>7. Errata and metadata</b></h3>
+    <h3><b>6. Things that you would suggest to the ABS to include in datapacks?</b></h3>
+    The ABS should either develop a CRAN package for R that holds all the Census data or 
+    it should provide DB scripts that construct tables for people to use in their own systems. 
+    <p/>
+    I may have a go at the CRAN package... maybe...
+    <p/>
+    
+
+    <h3><b>7. Errata and metadata</b></h3>
     <p/> There are a number of fields in the Data Packs that feature a ".." instead of a number. This signifies that the collected
     number was too small to report or too small to be significant.<br/> It also means the number is so small that it may
     have lead to the perception or reality that an individual could be identified in an area based on the characteristic.
@@ -115,8 +155,10 @@
     <p/>
     <p/>
 
-    I made this and that. Gabe Sargeant 2017
+    I made this and that.<p/>
+    Made by Gabriel Sargeant 2017. The JS and Python is at <a href="https://github.com/gabesargeant/maptodata" target="_blank">my github repo</a>
+    
 
 </div>
 
-<hr/> {%endblock%}
+{%endblock%}
