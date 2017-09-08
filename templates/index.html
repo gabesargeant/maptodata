@@ -14,50 +14,41 @@
       <form id="fieldForm" action="/data" method="POST" style='display:inline;'>
 
         <div id="1dctr" class="ajbtn">
-          <input type="button" class="btn" id="btn1" onclick="_getColumnNames('01', '1d', 'btn1')" value="Get Fields relating to:"> Selected
-          Person Characteristics by Sex - Persons
+          <input type="button" class="btn" id="btn1" onclick="_getColumnNames('01', '1d', 'btn1')" value="Get Fields relating to:">          Selected Person Characteristics by Sex - Persons
         </div><br>
         <div id="1d" class="clst"></div><br>
         <div id="2dctr" class="ajbtn">
-          <input type="button" class="btn" id="btn2" onclick="_getColumnNames('02', '2d', 'btn2')" value="Get Fields relating to:"> Selected
-          Medians and Averages
+          <input type="button" class="btn" id="btn2" onclick="_getColumnNames('02', '2d', 'btn2')" value="Get Fields relating to:">          Selected Medians and Averages
         </div><br>
         <div id="2d" class="clst"></div><br>
         <div id="3dctr" class="ajbtn">
-          <input type="button" class="btn" id="btn3" onclick="_getColumnNames('03', '3d', 'btn3')" value="Get Fields relating to:"> Place
-          of Usual Residence on Census Night by Age - Persons
+          <input type="button" class="btn" id="btn3" onclick="_getColumnNames('03', '3d', 'btn3')" value="Get Fields relating to:">          Place of Usual Residence on Census Night by Age - Persons
 
         </div><br>
         <div id="3d" class="clst"></div><br>
         <div id="4dctr" class="ajbtn">
-          <input type="button" class="btn" id="btn4" onclick="_getColumnNames('04', '4d', 'btn4')" value="Get Fields relating to:"> Age
-          by Sex - Persons
+          <input type="button" class="btn" id="btn4" onclick="_getColumnNames('04', '4d', 'btn4')" value="Get Fields relating to:">          Age by Sex - Persons
 
         </div><br>
         <div id="4d" class="clst"></div><br>
         <div id="5dctr" class="ajbtn">
-          <input type="button" class="btn" id="btn5" onclick="_getColumnNames('05', '5d', 'btn5')" value="Get Fields relating to:"> Registered
-          Marital Status by Age by Sex - Persons aged 15 years and over
+          <input type="button" class="btn" id="btn5" onclick="_getColumnNames('05', '5d', 'btn5')" value="Get Fields relating to:">          Registered Marital Status by Age by Sex - Persons aged 15 years and over
         </div><br>
         <div id="5d" class="clst"></div><br>
         <div id="6dctr" class="ajbtn">
-          <input type="button" class="btn" id="btn6" onclick="_getColumnNames('06', '6d', 'btn6')" value="Get Fields relating to:"> Social
-          Marital Status by Age by Sex - Persons aged 15 years and over
+          <input type="button" class="btn" id="btn6" onclick="_getColumnNames('06', '6d', 'btn6')" value="Get Fields relating to:">          Social Marital Status by Age by Sex - Persons aged 15 years and over
         </div><br>
         <div id="6d" class="clst"></div><br>
         <div id="7dctr" class="ajbtn">
-          <input type="button" class="btn" id="btn7" onclick="_getColumnNames('07', '7d', 'btn7')" value="Get Fields relating to:"> Indigenous
-          Status by Age by Sex - Persons
+          <input type="button" class="btn" id="btn7" onclick="_getColumnNames('07', '7d', 'btn7')" value="Get Fields relating to:">          Indigenous Status by Age by Sex - Persons
         </div><br>
         <div id="7d" class="clst"></div><br>
         <div id="8dctr" class="ajbtn">
-          <input type="button" class="btn" id="btn8" onclick="_getColumnNames('08', '8d', 'btn8')" value="Get Fields relating to:"> Ancestry
-          by Country of Birth of Parents - Responses and persons
+          <input type="button" class="btn" id="btn8" onclick="_getColumnNames('08', '8d', 'btn8')" value="Get Fields relating to:">          Ancestry by Country of Birth of Parents - Responses and persons
         </div><br>
         <div id="8d" class="clst"></div><br>
         <div id="9dctr" class="ajbtn">
-          <input type="button" class="btn" id="btn9" onclick="_getColumnNames('09', '9d', 'btn9')" value="Get Fields relating to:"> Country
-          of Birth of Person by Age by Sex - Persons
+          <input type="button" class="btn" id="btn9" onclick="_getColumnNames('09', '9d', 'btn9')" value="Get Fields relating to:">          Country of Birth of Person by Age by Sex - Persons
         </div><br>
         <div id="9d" class="clst"></div><br>
         <div id="10dctr" class="ajbtn">
@@ -180,11 +171,12 @@
     </p>
   </section>
 </div>
-<hr/> 
+<hr/>
 
 <div id="map">
-  <div class="floatingControls c35">
-  <select id="selectLayer" name="selectLayer" class="select-style">
+  <div class="floatingControls c35 flex_container">
+    <div class="flex_control">
+      <select id="selectLayer" name="selectLayer" class="select-style">
             <option  value="1" selected="selected">Select the Level of Detail</option>
             <option value="0">Australia</option>
             <option value="1">State/Territory</option>
@@ -199,19 +191,20 @@
             <option value="10">State Electoral Divisions</option>
             <option value="11">Local Government Areas</option>
              
-          </select> 
-          &nbsp;&nbsp;&nbsp;
-    <input name="drawPolygon" type="button" id="drawPolygon" value="Select a Polygon"   class="btn" /> OR
-      <input name="drawRectangle" type="button" id="drawRectangle" value="Select a Rectangle"  class="btn" /> OR
-      <input name="drawPoint" type="button" id="drawPoint" value="Select a Point"  class="btn" /> &nbsp;&nbsp;&nbsp;
-      <input name="Reset" type="button" id="Reset" value="Reset"  class="greenBtn" /> &nbsp;&nbsp;&nbsp; 
-      <input type="hidden" id="fieldsArr" name="fieldsArr" value="" />
-      <input name="getData" type="submit" id="getData" value="Get Data"  class="redbtn"/>
-      </div>
+          </select> &nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="flex_control"><input name="drawPolygon" type="button" id="drawPolygon" value="Select a Polygon" class="btn" /> OR &nbsp;</div>
+    <div class="flex_control"><input name="drawRectangle" type="button" id="drawRectangle" value="Select a Rectangle" class="btn" /> OR &nbsp;</div>
+    <div class="flex_control"><input name="drawPoint" type="button" id="drawPoint" value="Select a Point" class="btn" /> &nbsp;&nbsp;&nbsp;</div>
+    <div class="flex_control"><input name="Reset" type="button" id="Reset" value="Reset" class="greenBtn" /> &nbsp;&nbsp;&nbsp; </div>
+    <div class="flex_control"><input type="hidden" id="fieldsArr" name="fieldsArr" value="" /></div>
+    <div class="flex_control"><input name="getData" type="submit" id="getData" value="Get Data" class="redbtn" /></div>
+  </div>
   <img id="loadingImg" src="static/img/loading.gif" />
 </div>
 </form>
 <script type=text/javascript>
   $SCRIPT_ROOT = {{ request.script_root|tojson }};
+
 </script>
 {%endblock%}

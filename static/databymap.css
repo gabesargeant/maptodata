@@ -3,6 +3,7 @@
  	font-size: 10pt;
 	 color: rgb(68, 68, 68);
 	 height: 97%;
+	 min-width: 550px;
  }
 
 
@@ -192,6 +193,18 @@ table.dataTable tr:not(:nth-child(1)):hover {
   padding: 4px;
 }
 
+.flex_container{
+	display: -webkit-flex;
+	display: flex;
+	flex-wrap:wrap;
+	direction: lft;
+	position: relative;
+}
+
+.flex_controls{
+
+}
+
 .floatingControls{
 	position: absolute;
 	z-index: 100;
@@ -272,7 +285,7 @@ table.dataTable tr:not(:nth-child(1)):hover {
 }
 
 .grey{
-	background-color: rgba(171,217,233,0.5);
+	border: 1px solid #000;
 	text-align: center;
 	overflow: hidden;
 	

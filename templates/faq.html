@@ -4,7 +4,25 @@
     <h3>This is the catch all FAQ, help guide and explanation on how I built this site and the specific components that I used.</h3>
     <p/>
     <p/>
-    <h3><b>-1. Really quickly, how does this work?</b></h3>
+    <hr/>
+    <ul>
+        <li><a href="#0">0. Really quickly, how does this work?</a></li>
+        <li><a href="#1">1. What's this site about?</a></li>
+        <li><a href="#2">2. Limits</a></li>
+        <li><a href="#3">3. How was this site made, what does it run on and where did the DB come from?</a></li>
+        <li><a href="#4">4. Why did I make this site.</a></li>
+        <li><a href="#5">5. What external services?</a></li>
+        <li><a href="#6">6. What were some of the hard parts of this?</a></li>
+        <li><a href="#7">7. Things that you would suggest to the ABS to include in datapacks?</a></li>
+        <li><a href="#8">8. Errata and metadata</a></li>
+    </ul>
+    <hr/>
+    <p/>
+    <p/>
+
+
+
+    <h3 id="0"><b>0. Really quickly, how does this work?</b></h3>
     <p/>
     <p/>
     <b>Select some fields</b><br/>
@@ -15,7 +33,7 @@
     <p/>
     <b>Select an area. Either a polygon, rectable or point</b><br/>
     <div class="grey">
-    <img src="/static/img/select1.jpg" /></div>
+        <img src="/static/img/select1.jpg" /></div>
     <p/>
     <b>Get data or reset if you mess it up!</b><br/>
     <div class="grey"><img src="/static/img/getreset.jpg" /></div>
@@ -27,40 +45,43 @@
     <p/>
     <p/>
     <p/>
-    <h3><b>0. What's this site about?</b></h3>
+    <h3 id="1"><b>0. What's this site about?</b></h3>
     <p/> Data about people in places in Australia.....
     <p/> In August last year everyone in Australia tried to do the Census. Then the website crashed....a couple days later things
     were repaired and the Census was collected.
-    <p/> This is that data....
+    <p/> This is that data.
     <p/>
-    <p/> Whenever the ABS collects data it has to turn that data into a product it can distribute to the public. <br/>For the
-    census there are a ton of products that get built and released. In my opinion the best census product that the ABS creates
-    is the Census Data Packs. It is about as close as you can get to a raw dataset of Australian population data. The Data
+    <p/> Whenever the ABS collects data it has to turn that data into a product it can distribute to the public. <br/> For the
+    census there are a ton of products that get built and released. In my opinion the best census product that the ABS puts out
+    is the Census Data Packs. <br/>It is about as close as you can get to a raw dataset of Australian population data. The Data
     Packs are comprised simply of a sets flat CSV files with very little noise around the data (and a bare minimum of Excel
     spreadsheets).
     <p/> If you break down what the census is you get to at a basic theme of "data about people in places"
-    <p/> Thinking about it from that level I decided to create a site that allows you to select attributes about people and then
+    <p/> Thinking about it from that perspective I decided to create a site that allows you to select attributes about people and then
     select an area of inquiry. It's a visual / map driven search of a geographically tagged database.
     <p/> This site allows you to search 12 different geographic levels of detail in Australia, across ~8000 reported or imputed
-    response fields. If you sum up the total number of Statistical Areas, Electoral Districts, postcodes and suburbs in Australia
-    you get about 74000 areas that the database can provide numbers on. ~74,000 * ~8000 response fields gives you around
+    response fields. 
+    
+    <p/>If you sum up the total number of Statistical Areas, Electoral Districts, postcodes and suburbs in Australia
+    you get about 74000 areas that the database can provide numbers on.<p/> ~74,000 * ~8000 response fields gives you around
     590 Million cells in the database.
 
-    <h3><b> 1. Limits</b></h3>
+    <h3 id="2"><b>1. Limits</b></h3>
     In short: <br/> A single request from a user can get data on up to 10 response fields, and up to 1000 geographic areas
     from the same geographic level of detail. This returns a table of 10,000 cells. Which is enough for a single web page
     coming in at under 80-100KB
     <p/> These limits exist to ease the strain on your bandwidth, and to limit the strain on the tiny EC2-micro instance that
-    is running this site. If you want access to the whole dataset then feel free to download it for free from the ABS.
+    is running this site. If you want access to the whole dataset then feel free to download it for free from the ABS. Look for Census datapacks.
     <p/>
-    <h3><b>2. How was this site made, what does it run on and where did the DB come from?</b></h3>
-    <p/> Its all fairly simple tech. I did make some choices that I would change if I was starting again. But this works, pretty well too.<br/>
+    <p/>
+    <h3 id="3"><b>2. How was this site made, what does it run on and where did the DB come from?</b></h3>
+    <p/> Whilst the site can appear complex in functionality, its actually fairly standard in design. 
     <p/> I'll start with the site itself then the DB and then the AWS server that is hosting it.
     <p/>
     <ul>
         <li>
             <b> The site</b>
-            <p/> The website is A staggering 4 pages.<br> It uses the following technologies:
+            <p/> The website is A staggering 4 pages. 5 if you include the error 404 page.<br> It uses the following technologies:
             <ul>
                 <li>
                     Python </li>
@@ -75,30 +96,42 @@
                 <li>
                     More Javascript, the Esri JS API and JQuery to glue the maps and forms together.</li>
             </ul>
-            <p/> The code is pretty self explanatory. For the first page I load a bunch of layers from the ABS map servers then
+            <p/> The code is pretty self explanatory. (Asuming you know python). 
+            On the first page I load a bunch of map layers from the ABS map servers then
             hide them and listen out for form changes in the select box to show them to the user. These selections also are
-            tied to zoom levels that hint to the user that if they want to look at SA1 areas in Australia then they should
-            zoom in.
+            tied to zoom levels that hint to the user an appropriate level of zoom to have for the detail they are looking at.
+            <p/>
+            That zoom feature is not perfect but it attempts to prevent people from trying to render sixty thousand geographies in a single go.
+            
         </li>
         <li><b>The DB</b>
-            <p/> The db is a mysql database of just over 65 tables, One table is an index that maps column names to tables that
+            <p/> The db is a mysql database of about 65 tables, One table is an index that maps column names to tables that
             they exist in. There is another that does Short header names to long headers for the columns and the rest are
-            just table of data.
+            just tables of data.
             <p/> The DB is simple and I think the way I constructed it is the easiest way to put it together.
-            <p/> The design is based on the following facts.
-            <p/> Each geography has a unique identifier, not only to its own classification but also unique amongst each other geographic layer. The SA4
-            with some code of (An SA4 code) will be unique to not only the other SA4s but all the SA3, SA2s, post codes etc
-            etc. Sounds like a good candidate for a primary key!
-            <p/> In addition to this the ABS kept the columns consistent between areas. You get the sum of an area if you look
-            at its related encompassing geography at a lower level of detail.
-            <p/> The DB is doing lots of reads and no writes!
-            <br/> This made the the DB really easy to construct after a lot of thinking.
-            <br/> I used the Linux 'head' tool and clipped the first line off each of the datapacks. I then flipping those
+            <p/> The design is informed by the following facts.
+            <p/> Each geography has a unique identifier, not only to its own classification but also unique amongst each other
+            geographic layer. An area code will be unique to not only the other areas in its layer but all the
+            other areas in each other layer. Naturally this sounds like a good candidate for a primary key!
+            <p/> The ABS kept the columns consistent between areas apart from the geography column. 
+            For each geography I had to change a column like POST_CODE to a general name so 
+            I could use a standard 'load file inline' script accross all types of files. 
+            <p/>
+            A nice thing about the ASGS system is that you get the benefits of the heirarchy with searches. 
+            Most (read the ASGS metatdata) of the SA1.2.3.4 areas dovetail into a larger area ( SA1's fit nicely into an SA2 and SA2 to  etc.). 
+            So you you get the sum of an area if you look at its related encompassing geography at a lower level of detail etc.
+            
+            <p/> Because the DB is doing lots of reads and no writes it made the the DB really easy to construct after a lot of thinking.
+            
+            <p/>The general process was to use the Linux 'head' tool and clip the first line off each of the datapacks. I then flipping those
             into a text file and using the MySQL developer 'Create Multiple Tables' option to feed in the structure. It spat
-            out an empty Schema Which I forward engineered into a db. From here it was just a matter of scripting about ~800
+            out an empty db schema which I forward engineered into a db. After doing that it was just a matter of scripting about ~800
             mysql 'load data local infiles' operations to get the job done.
-            <p/> Another great win was the datapacks are all Integer numbers. That made things really nice an easy for data types. <br/>
-            I also had to replace a few things (See the Errata), so the usual, cat, sed and such were used to smooth over a few bumps.
+            <p/>
+            I had tried to join some tables that were really wide, like th count of agest from 1 - 101 in sexes. (> 200 columns and two tables).
+            <br/> This didn't work out so well. It became easier to just get the CSVs straight into the DB with the least fuss.
+            <p/> Another great win was the datapacks are all Integer numbers. That made things really nice an easy for data types.
+            <p/>
         </li>
         <li> <b>The AWS Server</b>
             <p/> Really simple here too:
@@ -117,43 +150,56 @@
     </ul>
     <p/> IF I do this again sometime I will use sqlite for the DB as it's better supported with python.
     <p/>
-    <h3><b>3. Why did I make this site..</b></h3>
+    <h3 id="4"><b>3. Why did I make this site.</b></h3>
     <p/> Why not!
-    <p/> Also, I wanted to do thematic mapping with the Esri ArcGIS JS framework. Its a good challenge to build something that
-    is fairly stable and hooks into a large number of external services.
-    <p/>And big databases are good fun. And i wanted to learn python and the flask framework!
+    <p/> And, I wanted to do a few things. 1. thematic mapping with the Esri ArcGIS JS framework. 2. To build something that
+    hooks into a large number of external services.
+    3. Build a big database, And 4. I wanted to learn python and the flask framework.
     <p/>
+    
     <p/>
-    <h3><b>4. What external services?</b></h3>
+    <h3 id="5"><b>4. What external services?</b></h3>
     <p/> My tiny website doesn't really do all that much. When you connect to it, the server passes you back some javascript
-    and data. Your browser then makes many calls out to the wider web. More to the point it reaches out to a few CDN's for
-    information and extra code. Your browser is pretty much assembling a program on the fly that does this mapping. All I
+    and data. Your browser then makes a few calls (many) out to the wider web. More to the point it reaches out to a few CDN's for
+    information and extra code. The browser is pretty much assembling a program on the fly that does this mapping. All I
     do is specify numbers / colors and some basic styling.
-    <p/> Writing it down, it doesn't seem like much, but some of this was hard. I assure you!.
-    <p/> So your browser hits up Google(JQuery), Esri (basemaps and js framework), and the ABS (maps) for data and then put it
+    <p/> Writing it down, it doesn't seem like much, but some of this was hard. I assure you.
+    <p/> Your browser hits up Google for JQuery, Esri for basemaps and the js mapping framework, and the ABS for maps. 
+    And my site hosts the data. All that happens then is your browser puts it
     all together in the form of this sight.
-    <p/> My server just passes along the data.
     <p/>
     <p/>
-    <h3>5. What were some of the hard parts of this?</h3>
-    <p/> Australia is big, but dense and empty. All at once! <br/> Sorry Aulbry, and Townsville and other medium sized centers.
-    Most of Australia lives in 8 cities. To be honest it's 3. Heat maps and regular visualization techniques don't work so
-    well unless you zoom right in. <br/> Hence why I have auto zoom on some of the more detailed areas.
-    <p/> The Esri framework can also be a challenge, Its got a fairly steep learning curve. I also kind of hate Javascript.
-    <p/> The database took about 3 weeks to build/script.
+    <h3 id="6">5. What were some of the hard parts of this?</h3>
+    <p/> Australia is big, dense, empty and small. All at once! <p/> 
+    Sorry Aulbry, and Townsville and other medium sized centers.
+    Most of Australia lives in 8 cities and to be honest it's mostly in 3. Heat maps and regular visualization techniques don't work so
+    well unless you zoom right in. <br/>Hence why I have auto zoom on some of the more detailed areas. 
+    If you look at America you can see cool trends with microdata from a macro perspective. 
+    In Australia most of people live in Sydney, Melbourne and Brisbane. If you look at australia zoom out to see the trends, it's been the same from the time of the first fleet. 
+    Everyone is hugging th east cost and no one (relatively) lives in the center. <p/>
+    This just makes it a little harder to do big visualizations, espectially with the ASGS geographies as they are tuned towards representing areas of like populations. 
+    So even looking at all the SA2 or 3's in Victoria for example. You see the same overall trend, Huge spaces, sparesly populated to the edges and everyone centering in Melbourne. 
+    <p/>
+    This also depends a lot on the types of data your looking at. Greater density means that you seem more of everything. 
+    <p/>
+    <p/>The TL;DR. It's hard to build a generalized thematic mapping tool because context is everything. But for the best results generally, Zoom in!
+    <p/>
+    <p/>Other Challenges:
+    <br/> The Esri framework can also be a challenge, It has a steep learning curve if you want to do complex stuff. And I also kind of hate Javascript.
+    <p/> The database took about 3 weeks to build/script. It was a paint because I did it the wrong way about 3 times.
     <br/>Once I had it all scripted. The script takes about 15 minutes to parse the files, generate a schema and then import
-    the data.
+    the data. So that's nice.
     <p/>
     <p/>
 
-    <h3><b>6. Things that you would suggest to the ABS to include in datapacks?</b></h3>
+    <h3 id="7"><b>6. Things that you would suggest to the ABS to include in datapacks?</b></h3>
     The ABS should either develop a CRAN package for R that holds all the Census data or it should provide DB scripts that construct
     tables for people to use in their own systems.
     <p/> I may have a go at the CRAN package... maybe...
     <p/>
 
 
-    <h3><b>7. Errata and metadata</b></h3>
+    <h3 id="8"><b>7. Errata and metadata</b></h3>
     <p/> There are a number of fields in the Data Packs that feature a ".." instead of a number. This signifies that the collected
     number was too small to report or too small to be significant.<br/> It also means the number is so small that it may
     have lead to the perception or reality that an individual could be identified in an area based on the characteristic.
