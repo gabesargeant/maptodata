@@ -123,10 +123,10 @@
             
             <p/> Because the DB is doing lots of reads and no writes it made the the DB really easy to construct after a lot of thinking.
             
-            <p/>The general process was to use the Linux 'head' tool and clip the first line off each of the datapacks. I then flipping those
-            into a text file and using the MySQL developer 'Create Multiple Tables' option to feed in the structure. It spat
-            out an empty db schema which I forward engineered into a db. After doing that it was just a matter of scripting about ~800
-            mysql 'load data local infiles' operations to get the job done.
+            <p/>The general process was to use the Linux 'head' tool and clip the first line off each of the datapacks. 
+            I then piped the output of that into a text file and using the MySQL developer 'Create Multiple Tables' option to develop the db structure. 
+            It spat out an empty db schema which I forward engineered into a db. 
+            After doing that it was just a matter of scripting about ~800 mysql 'load data local infiles' operations to get the job done.
             <p/>
             I had tried to join some tables that were really wide, like th count of agest from 1 - 101 in sexes. (> 200 columns and two tables).
             <br/> This didn't work out so well. It became easier to just get the CSVs straight into the DB with the least fuss.
